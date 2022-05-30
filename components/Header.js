@@ -4,6 +4,7 @@ import Link from 'next/link';
 const headerStyle = css`
   width: 100%;
   position: fixed;
+  z-index: 1;
   top: 0;
   left: 0;
   margin-bottom: 10px;
@@ -78,19 +79,11 @@ const headerContentStyles = css`
 
 export default function Header() {
   return (
-    // <header css={headerStyles}>
-    //   <div>
-    //     <Link href="/">Home</Link>
-    //     <Link href="/about">About</Link>
-    //     <Link href="/t-shirt">T-shirts</Link>
-    //   </div>
-    // </header>
-
     <header css={headerStyle}>
       <div css={upperBanner}>Free delivery from 30€ and free returns</div>
       <div css={headerContentStyles}>
         <div className="navContainer">
-          <Link href="/index">
+          <Link href="/">
             <div>
               <span className="colorLogo">orange</span>
               <span>orange</span>
