@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Link from 'next/link';
-import { prependOnceListener } from 'process';
 import { useEffect, useState } from 'react';
 import { getParsedCookie, setStringifiedCookie } from '../../util/cookies';
 import { tshirtDataBase } from '../../util/database';
@@ -103,7 +102,6 @@ const contentRightSide = css`
   .wishlist {
     border-radius: 100%;
     width: 49px;
-    height: 49px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -174,67 +172,44 @@ const contentBottom = css`
 `;
 
 export default function Tshirt(props) {
-  // Check if the tshirt is inside of the cart by checking the property counter
-  const [isInCart, setIsInCart] = useState('counter' in props.tshirt);
-  // initialize the counter with the value of the cookie or 0
-  const [counter, setCounter] = useState(props.tshirt.counter || 0);
-
-  // useEffect(() => {
-  //   const currentCart = Cookies.get('cart')
-  //     ? JSON.parse(Cookies.get('cart'))
-  //     : [];
-  //   if (
-  //     currentCart.find((tshirtInCart) => props.tshirt.id === tshirtInCart.id)
-  //   ) {
-  //     setIsInCart(false);
-  //   } else {
-  //     setIsInCart(true);
-  //   }
-  // }, [props.tshirt.id]);
-
-  // useEffect(() => {
-  //   const currentCart = Cookies.get('cart')
-  //     ? JSON.parse(Cookies.get('cart'))
-  //     : [];
-
-  //   const currentTshirtInCart = currentCart.find(
-  //     (tshirtInCart) => props.tshirt.id === tshirtInCart.id,
-  //   );
-  //   if (currentTshirtInCart) {
-  //     setCounter(currentTshirtInCart.counter);
-  //   }
-  // }, [props.tshirt.id]);
+  const [counter, setCounter] = useState(props.superTshirt.quantity || 1);
 
   return (
     <div css={contentAll}>
       <div css={heading}>
-        {/* <Link href="/">
-          <Image src="/homeLogo.png" width="30" height="30" alt=" home Logo" />
-        </Link> */}
-        <h1>/ All T-Shirts / {props.tshirt.name}</h1>
+        <Link href="/">
+          <div>
+            <Image
+              src="/homeLogo.png"
+              width="30"
+              height="30"
+              alt=" home Logo"
+            />
+          </div>
+        </Link>
+        <h1>/ All T-Shirts / {props.superTshirt.name}</h1>
       </div>
       <div className="contentMainBottom">
         <div css={contentMain}>
           <div css={contentLeftSife}>
             <Image
-              src={`/${props.tshirt.id}.jpg`}
-              alt="girl with white shirt"
+              src={`/${props.superTshirt.id}.jpg`}
+              alt="product image"
               width="262"
               height="393"
             />
           </div>
           <div css={contentRightSide}>
             <h1>
-              {props.tshirt.name}
-              <br />
-              {props.tshirt.price}
+              {props.superTshirt.name}
+              <br />€ {props.superTshirt.price}
             </h1>
-            <p className="refferrence">REF:{props.tshirt.id}</p>
+            <p className="refferrence">REF:{props.superTshirt.id}</p>
             <p className="helpSize">Help about your size</p>
             <p className="yourSize">
               <select>
                 <option>Choose size</option>
-                {props.tshirt.size.map((size) => {
+                {props.superTshirt.size.map((size) => {
                   return <option key={`tshirt-${size}`}> {size} </option>;
                 })}
               </select>
@@ -246,19 +221,9 @@ export default function Tshirt(props) {
                   type="button"
                   className="quantityButton"
                   onClick={() => {
-                    setCounter(counter - 1);
-                    // 1. get the cookie
-                    const currentCart = Cookies.get('cart')
-                      ? getParsedCookie('cart')
-                      : [];
-                    // 2. get the tshirt
-                    const currentTshirtInCart = currentCart.find(
-                      (tshirtInCart) => props.tshirt.id === tshirtInCart.id,
-                    );
-                    // 3. update the counter inside the tshirt
-                    currentTshirtInCart.counter -= 1;
-                    // 4. set the new cookie
-                    setStringifiedCookie('cart', currentCart);
+                    if (counter > 1) {
+                      setCounter((count) => count - 1);
+                    }
                   }}
                 >
                   -
@@ -269,18 +234,6 @@ export default function Tshirt(props) {
                   className="quantityButton"
                   onClick={() => {
                     setCounter(counter + 1);
-                    // 1. get the cookie
-                    // const currentCart = Cookies.get('cart')
-                    //   ? getParsedCookie('cart')
-                    //   : [];
-                    // // 2. get the tshirt
-                    // const currentTshirtInCart = currentCart.find(
-                    //   (tshirtInCart) => props.tshirt.id === tshirtInCart.id,
-                    // );
-                    // // 3. update the counter inside the tshirt
-                    // currentTshirtInCart.counter += 1;
-                    // // 4. set the new cookie
-                    // setStringifiedCookie('cart', currentCart);
                   }}
                 >
                   +
@@ -294,23 +247,28 @@ export default function Tshirt(props) {
                     ? getParsedCookie('cart')
                     : [];
                   let newCart;
-                  if (
-                    currentCart.find(
-                      (tshirtInCart) => props.tshirt.id === tshirtInCart.id,
-                    )
-                  ) {
-                    newCart = currentCart.filter(
-                      (tshirtInCart) => tshirtInCart !== props.tshirt.id,
-                    );
-
-                    // newCart = currentCart.map((tshirtInCart) => {
-                    //   if (props.tshirt.id === tshirtInCart.id) {
-                    //     return { ...tshirtInCart, counter: counter };
+                  const tshirtInCart = currentCart.find(
+                    (currenttshirt) =>
+                      props.superTshirt.id === currenttshirt.id,
+                  );
+                  if (tshirtInCart) {
+                    // console.log(
+                    //   `Found t shirt with id ${tshirtInCart.id} in cart with quantity ${tshirtInCart.quantity}`,
+                    // );
+                    // console.log(
+                    //   `Current counter that will be added for t shirt: ${counter}`,
+                    // );
+                    // increase quantity counter in the object that was fetched using cookie
+                    tshirtInCart.quantity = tshirtInCart.quantity + counter;
+                    // console.log(
+                    //   `Updated tShirtInCart ${JSON.stringify(tshirtInCart)}`,
+                    // );
+                    newCart = currentCart;
                   } else {
                     //add the value
                     newCart = [
                       ...currentCart,
-                      { id: props.tshirt.id, counter: 0 },
+                      { id: props.superTshirt.id, quantity: counter },
                     ];
                   }
                   //set the cookie to the new value
@@ -356,7 +314,7 @@ export default function Tshirt(props) {
 export function getServerSideProps(context) {
   // 1. Get the value of the cookie from the request object
   const currentCart = JSON.parse(context.req.cookies.cart || '[]');
-  // 2. get the id from the url and use it to match the single tshirt id
+  // 2. get the id from the url and use it to match the single tshirt id in the database
   const tshirtId = context.query.tshirtId;
   const foundtshirt = tshirtDataBase.find((tshirt) => {
     return tshirt.id === tshirtId;
@@ -376,7 +334,7 @@ export function getServerSideProps(context) {
 
   return {
     props: {
-      tshirt: superTshirt,
+      superTshirt: superTshirt,
     },
   };
 }

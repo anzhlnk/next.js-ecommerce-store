@@ -141,7 +141,7 @@ export default function listTshirts(props) {
             />
           </div>
         </Link>
-        <h1>/ All T-Shirts</h1>
+        <h1>/ Men</h1>
       </div>
       <div css={content}>
         <div css={contentLeftSide}>
@@ -213,7 +213,7 @@ export default function listTshirts(props) {
         </div>
         <div css={contentRighSide}>
           <div className="contentTop">
-            <h1>All T-shirts</h1>
+            <h1>Men T-shirts</h1>
             <div>
               <span>Sort by: </span>
               <select>
@@ -226,25 +226,27 @@ export default function listTshirts(props) {
 
           <div css={tshirtListStyles}>
             {props.tshirts.map((tshirt) => {
-              return (
-                <div key={`tshirt-${tshirt.id}`} css={tshirtListItemStyles}>
-                  <Link href={`/tshirts/${tshirt.id}`}>
-                    <div>
-                      <Image
-                        src={`/${tshirt.id}.jpg`}
-                        alt="product image"
-                        width="262"
-                        height="393"
-                      />
+              if (tshirt.category === 'man') {
+                return (
+                  <div key={`tshirt-${tshirt.id}`} css={tshirtListItemStyles}>
+                    <Link href={`/tshirts/${tshirt.id}`}>
+                      <div>
+                        <Image
+                          src={`/${tshirt.id}.jpg`}
+                          alt="product image"
+                          width="262"
+                          height="393"
+                        />
+                      </div>
+                    </Link>
+                    <div>{tshirt.name}</div>
+                    <div className="itemInfo">
+                      <div>{tshirt.size.join(' ')}</div>
+                      <div>€ {tshirt.price}</div>
                     </div>
-                  </Link>
-                  <div>{tshirt.name}</div>
-                  <div className="itemInfo">
-                    <div>{tshirt.size.join(' ')}</div>
-                    <div>€ {tshirt.price}</div>
                   </div>
-                </div>
-              );
+                );
+              }
             })}
           </div>
         </div>
@@ -254,6 +256,8 @@ export default function listTshirts(props) {
 }
 
 export function getServerSideProps() {
+  console.log(tshirtDataBase);
+
   return {
     props: { tshirts: tshirtDataBase },
   };

@@ -193,7 +193,7 @@ export default function Footer() {
           <ul>
             <li>Contact</li>
             <li>
-              <Link href="/">orangeprange@gmail.com</Link>
+              <Link href="/">orangeorange@gmail.com</Link>
             </li>
             <li>
               <Link href="/">Hotline: +1 111 11 1 11</Link>

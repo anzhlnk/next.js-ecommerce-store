@@ -1,5 +1,3 @@
-import fs from 'node:fs';
-
 export const tshirtDataBase = [
   {
     id: '1',
@@ -7,7 +5,7 @@ export const tshirtDataBase = [
     category: 'woman',
     color: 'black',
     size: ['xs', 's', 'l', 'm'],
-    price: '34€',
+    price: '34',
   },
   {
     id: '2',
@@ -15,7 +13,7 @@ export const tshirtDataBase = [
     category: 'woman',
     color: 'grey',
     size: ['s', 'l', 'm', 'xxl'],
-    price: '27€',
+    price: '27',
   },
   {
     id: '3',
@@ -23,7 +21,7 @@ export const tshirtDataBase = [
     category: 'man',
     color: 'orange',
     size: ['xs', 's', 'm', 'xxl'],
-    price: '30€',
+    price: '30',
   },
   {
     id: '4',
@@ -31,7 +29,7 @@ export const tshirtDataBase = [
     category: 'woman',
     color: 'pink',
     size: ['m', 'l', 'xxl'],
-    price: '48€',
+    price: '48',
   },
   {
     id: '5',
@@ -39,7 +37,7 @@ export const tshirtDataBase = [
     category: 'woman',
     color: 'red',
     size: ['xs', 's'],
-    price: '45€',
+    price: '45',
   },
   {
     id: '6',
@@ -47,7 +45,7 @@ export const tshirtDataBase = [
     category: 'man',
     color: 'black',
     size: ['m', 'l', 'xl', 'xxl'],
-    price: '28€',
+    price: '28',
   },
   {
     id: '7',
@@ -55,7 +53,7 @@ export const tshirtDataBase = [
     category: 'man',
     color: 'white',
     size: ['xs', 's', 'm'],
-    price: '31€',
+    price: '31',
   },
   {
     id: '8',
@@ -63,7 +61,7 @@ export const tshirtDataBase = [
     category: 'man',
     color: 'orange',
     size: ['xs', 's', 'm', 'l', 'xxl'],
-    price: '25€',
+    price: '25',
   },
   {
     id: '9',
@@ -71,6 +69,6 @@ export const tshirtDataBase = [
     category: 'woman',
     color: 'brown',
     size: ['s', 'l', 'xxl'],
-    price: '30€',
+    price: '30',
   },
 ];

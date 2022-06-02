@@ -1,5 +1,8 @@
 import { css } from '@emotion/react';
+import Cookies from 'js-cookie';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { getParsedCookie } from '../util/cookies';
 
 const headerStyle = css`
   width: 100%;
@@ -77,7 +80,24 @@ const headerContentStyles = css`
   }
 `;
 
-export default function Header() {
+export default function Header(props) {
+  // const [cart, setCart] = useState(props.quantityInCart);
+  // console.log(props);
+
+  // const clearedProps = props.cartProps.props.foundgoods;
+
+  // let totalQ = 0;
+  // for (let i = 0; i < clearedProps.length; i++) {
+  //   totalQ += clearedProps[i].quantity;
+  // }
+
+  // useEffect(() => {
+  //   for (let i = 0; i < clearedProps.length; i++) {
+  //     totalQ += clearedProps[i].quantity;
+  //   }
+  // }, [clearedProps]);
+
+  // console.log(totalQ);
   return (
     <header css={headerStyle}>
       <div css={upperBanner}>Free delivery from 30€ and free returns</div>
@@ -90,8 +110,8 @@ export default function Header() {
             </div>
           </Link>
           <nav>
-            <a href="/t-shirt">Women</a>
-            <a href="/t-shirt">Men</a>
+            <a href="/women">Women</a>
+            <a href="/men">Men</a>
             <a href="/t-shirt">All T-shirts</a>
             <a href="/products">Inspiration</a>
           </nav>
@@ -127,17 +147,15 @@ export default function Header() {
             </Link>
           </div>
           <div>
-            <Link href="/">
+            <Link href="/cartPage">
               <div>
                 <img
                   src="/shopping.jpeg"
                   className="cartIcon"
                   alt="shopping bag icon"
                 />
-                {/* {cartItems.length > 0 && (
-                <span className="btn-cart__count">{cartItems.length}</span>
-              )} */}
                 <span>Shopping bag</span>
+                {/* {totalQ > 0 && <span> {totalQ}</span>} */}
               </div>
             </Link>
           </div>
@@ -146,3 +164,17 @@ export default function Header() {
     </header>
   );
 }
+
+// export function getServerSideProps(context) {
+//   // 1. Get the value of the cookie from the request object
+//   const originalCart = JSON.parse(context.req.cookies.cart || '[]');
+//   const quantityInCart = originalCart.map((item) => {
+//     return item.quantity;
+//   });
+//   console.log('here it is', quantityInCart);
+//   return {
+//     props: {
+//       quantityInCart: quantityInCart,
+//     },
+//   };
+// }
