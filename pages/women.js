@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { tshirtDataBase } from '../util/database';
 
 const contentAll = css`
-  margin: 100px 24px 8px;
+  margin: 100px 24px 96px;
 `;
 
 const heading = css`
@@ -127,7 +127,7 @@ const tshirtListItemStyles = css`
   }
 `;
 
-export default function listTshirts(props) {
+export default function ListTshirtsWoman(props) {
   return (
     <div css={contentAll}>
       <div css={heading}>

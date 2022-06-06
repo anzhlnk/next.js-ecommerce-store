@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import Head from 'next/head';
 import Footer from './Footer';
 import Header from './Header';
 
@@ -10,13 +10,14 @@ const headerPosition = css`
 `;
 
 export default function Layout(props) {
-  // const cartProps = props.children;
-  // const clearedProps = props.children.foundgoods;
-  // const [cartProps, setCartProps] = useState(clearedProps);
-  // console.log(props.children);
   return (
     <div>
-      <Header css={headerPosition} />
+      <Head>
+        <title>Home page</title>
+        <meta name="description" content="Ecom store" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Header css={headerPosition} cartQ={props.cartQ} />
       {props.children}
       <Footer />
     </div>

@@ -7,7 +7,7 @@ import { getParsedCookie, setStringifiedCookie } from '../../util/cookies';
 import { tshirtDataBase } from '../../util/database';
 
 const contentAll = css`
-  margin: 100px 24px 8px;
+  margin: 100px 24px 96px;
 
   .contentMainBottom {
     display: flex;
@@ -273,6 +273,7 @@ export default function Tshirt(props) {
                   }
                   //set the cookie to the new value
                   setStringifiedCookie('cart', newCart);
+                  props.setCartQ(newCart);
                 }}
               >
                 Add to shopping bag

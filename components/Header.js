@@ -1,8 +1,5 @@
 import { css } from '@emotion/react';
-import Cookies from 'js-cookie';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { getParsedCookie } from '../util/cookies';
 
 const headerStyle = css`
   width: 100%;
@@ -78,26 +75,31 @@ const headerContentStyles = css`
       }
     }
   }
+  .iconQuantity {
+    margin-left: 0px;
+    border-radius: 100%;
+    border: 1px solid #d8d8d8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f7f7f7;
+    min-width: 22px;
+    min-height: 23px;
+    div {
+      margin-left: 0px;
+      padding: 4px;
+    }
+  }
 `;
 
 export default function Header(props) {
-  // const [cart, setCart] = useState(props.quantityInCart);
-  // console.log(props);
+  const clearedProps = props.cartQ;
 
-  // const clearedProps = props.cartProps.props.foundgoods;
+  let totalQ = 0;
+  for (let i = 0; i < clearedProps.length; i++) {
+    totalQ += clearedProps[i].quantity;
+  }
 
-  // let totalQ = 0;
-  // for (let i = 0; i < clearedProps.length; i++) {
-  //   totalQ += clearedProps[i].quantity;
-  // }
-
-  // useEffect(() => {
-  //   for (let i = 0; i < clearedProps.length; i++) {
-  //     totalQ += clearedProps[i].quantity;
-  //   }
-  // }, [clearedProps]);
-
-  // console.log(totalQ);
   return (
     <header css={headerStyle}>
       <div css={upperBanner}>Free delivery from 30€ and free returns</div>
@@ -110,10 +112,10 @@ export default function Header(props) {
             </div>
           </Link>
           <nav>
-            <a href="/women">Women</a>
-            <a href="/men">Men</a>
-            <a href="/t-shirt">All T-shirts</a>
-            <a href="/products">Inspiration</a>
+            <Link href="/women">Women</Link>
+            <Link href="/men">Men</Link>
+            <Link href="/t-shirt">All T-shirts</Link>
+            <Link href="/products">Inspiration</Link>
           </nav>
         </div>
 
@@ -154,10 +156,14 @@ export default function Header(props) {
                   className="cartIcon"
                   alt="shopping bag icon"
                 />
+
                 <span>Shopping bag</span>
-                {/* {totalQ > 0 && <span> {totalQ}</span>} */}
               </div>
             </Link>
+          </div>
+          <div className="iconQuantity">
+            {' '}
+            <div>{totalQ > 0 ? totalQ : '  '}</div>
           </div>
         </div>
       </div>

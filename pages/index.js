@@ -27,11 +27,11 @@ const sectionOne = css`
 export default function Home() {
   return (
     <div>
-      <Head>
+      {/* <Head>
         <title>Home page</title>
         <meta name="description" content="Ecom store" />
         <link rel="icon" href="/favicon.ico" />
-      </Head>
+      </Head> */}
       <main css={content}>
         <section css={sectionOne}>
           <h1>Summer collection sale</h1>

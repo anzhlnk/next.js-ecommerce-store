@@ -2,12 +2,13 @@ import { css } from '@emotion/react';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+// import { useCartContext } from '../context/cartQuantity';
 import { getParsedCookie, setStringifiedCookie } from '../util/cookies';
 import { tshirtDataBase } from '../util/database';
 
 const contentAll = css`
-  margin: 100px 24px 8px;
+  margin: 100px 24px 96px;
 `;
 
 const heading = css`
@@ -114,18 +115,6 @@ const buttons = css`
   display: flex;
   flex-direction: row;
   align-items: center;
-
-  .buttons button {
-    margin-right: 18px;
-    padding: 1px 8px;
-    height: 37px;
-    border: 1px solid #d8d8d8;
-    border-radius: 50px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
 
   .deleteButton {
     border-radius: 100%;
@@ -261,13 +250,14 @@ export default function CartPage(props) {
                               className="quantityButton"
                               onClick={() => {
                                 const newQuantity =
-                                  item.quantity > 1 ? item.quantity - 1 : 1; //to do: set the min quantity!!!
+                                  item.quantity > 1 ? item.quantity - 1 : 1;
 
                                 const updatedArray = combinedData.map((p) =>
                                   p.id === item.id
                                     ? { ...p, quantity: newQuantity }
                                     : p,
                                 );
+                                props.setCartQ(updatedArray);
                                 setCombinedData(updatedArray);
 
                                 // 1. get the cookie
@@ -297,6 +287,8 @@ export default function CartPage(props) {
                                     : p,
                                 );
                                 setCombinedData(updatedArray);
+                                props.setCartQ(updatedArray);
+
                                 // 1. get the cookie
                                 const currentCart = getParsedCookie('cart');
                                 // 2. get the tshirt
@@ -328,6 +320,8 @@ export default function CartPage(props) {
                               );
                               //3. update the state of the data
                               setCombinedData(updatedArray);
+                              props.setCartQ(updatedArray);
+
                               //Cookie part
                               // 1. get the cookie
                               const currentCart = getParsedCookie('cart');
@@ -387,7 +381,11 @@ export default function CartPage(props) {
                 <p>↩️ Free returns in 30 days</p>
                 <p>🔒 Secure payment</p>
               </div>
-              <button css={checkoutButton}>Checkout</button>
+              <Link href="/checkout">
+                <div>
+                  <button css={checkoutButton}>Checkout</button>{' '}
+                </div>
+              </Link>
             </div>
           </>
         )}
