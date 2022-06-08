@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { getParsedCookie, setStringifiedCookie } from '../../util/cookies';
-import { tshirtDataBase } from '../../util/database';
+import { getProduct } from '../../util/database';
 
 const contentAll = css`
   margin: 100px 24px 96px;
@@ -312,14 +312,26 @@ export default function Tshirt(props) {
   );
 }
 
-export function getServerSideProps(context) {
+export async function getServerSideProps(context) {
   // 1. Get the value of the cookie from the request object
   const currentCart = JSON.parse(context.req.cookies.cart || '[]');
   // 2. get the id from the url and use it to match the single tshirt id in the database
   const tshirtId = context.query.tshirtId;
-  const foundtshirt = tshirtDataBase.find((tshirt) => {
-    return tshirt.id === tshirtId;
-  });
+  const arrayDB = await getProduct(tshirtId);
+  const foundtshirt = {
+    id: arrayDB[0].id,
+    category: arrayDB[0].category,
+    color: arrayDB[0].color,
+    price: arrayDB[0].price,
+    size: arrayDB.map((currentSize) => {
+      return currentSize.size;
+    }),
+  };
+  console.log('with sizes', JSON.stringify(foundtshirt));
+
+  // tshirtDataBase.find((tshirt) => {
+  //   return tshirt.id === tshirtId;
+  // });
 
   if (!foundtshirt) {
     context.res.statusCode = 404;
@@ -332,6 +344,8 @@ export function getServerSideProps(context) {
 
   // 4. create a new object adding the properties from the cookie object to the tshirt in database
   const superTshirt = { ...foundtshirt, ...currentTshirtInCart };
+
+  console.log('superTshirt', superTshirt);
 
   return {
     props: {

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 // import { useCartContext } from '../context/cartQuantity';
 import { getParsedCookie, setStringifiedCookie } from '../util/cookies';
-import { tshirtDataBase } from '../util/database';
+import { getProducts } from '../util/database';
 
 const contentAll = css`
   margin: 100px 24px 96px;
@@ -199,16 +199,17 @@ export default function CheckOut(props) {
   );
 }
 
-export function getServerSideProps(context) {
+export async function getServerSideProps(context) {
   // 1. Get the value of the cookies from the request object
   const currentCart = JSON.parse(context.req.cookies.cart || '[]');
 
   // 2. get the objects from the cookies in the database
+  const productDatabase = await getProducts();
   let foundgoods = [];
 
   for (const item of currentCart) {
     // query tshirtDataBase to find id of current cart item
-    const tshirtData = tshirtDataBase.find((tshirt) => {
+    const tshirtData = productDatabase.find((tshirt) => {
       return tshirt.id === item.id;
     });
 

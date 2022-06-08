@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { createContext, useContext, useEffect, useState } from 'react';
 // import { useCartContext } from '../context/cartQuantity';
 import { getParsedCookie, setStringifiedCookie } from '../util/cookies';
-import { tshirtDataBase } from '../util/database';
+import { getProducts } from '../util/database';
 
 const contentAll = css`
   margin: 100px 24px 96px;
@@ -243,7 +243,7 @@ export default function CartPage(props) {
                         <p className="refferrence">REF:{item.id} </p>
                         <p>Color: {item.color}</p>
                         {/* to be changed !!! */}
-                        <p>Size: {item.size[0]}</p>
+                        <p>Size: {item.size}</p>
                         <div css={buttons}>
                           <div className="quantityButtonParent">
                             <button
@@ -394,30 +394,28 @@ export default function CartPage(props) {
   );
 }
 
-export function getServerSideProps(context) {
+export async function getServerSideProps(context) {
   // 1. Get the value of the cookies from the request object
   const currentCart = JSON.parse(context.req.cookies.cart || '[]');
 
   // 2. get the objects from the cookies in the database
+  const productDatabase = await getProducts();
 
-  // const foundgoods= tshirtDataBase.filter((tshirt) => {
-  //   return tshirtDataBase.id === currentCart.[tshirt].id;
-  // });
   let foundgoods = [];
 
   for (const item of currentCart) {
     // query tshirtDataBase to find id of current cart item
-    const tshirtData = tshirtDataBase.find((tshirt) => {
+    const tshirtData = productDatabase.find((tshirt) => {
       return tshirt.id === item.id;
     });
 
-    if (!tshirtData) {
-      alert(
-        `Error occured: Could not find cart item t shirt id ${item.id} in tshirtDataBase`,
-      );
-      context.res.statusCode = 404;
-      break;
-    }
+    // if (!tshirtData) {
+    //   alert(
+    //     `Error occured: Could not find cart item t shirt id ${item.id} in tshirtDataBase`,
+    //   );
+    //   context.res.statusCode = 404;
+    //   break;
+    // }
     // 4. create a new object adding the properties from the cookie object to the tshirt in database
     const superTshirt = { ...tshirtData, ...item };
 

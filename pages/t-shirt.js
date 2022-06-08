@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 // import Slider, { Range } from 'rc-slider';
-import { tshirtDataBase } from '../util/database';
+import { getProducts } from '../util/database';
 
 const contentAll = css`
   margin: 100px 24px 96px;
@@ -240,7 +240,7 @@ export default function ListTshirts(props) {
                   </Link>
                   <div>{tshirt.name}</div>
                   <div className="itemInfo">
-                    <div>{tshirt.size.join(' ')}</div>
+                    <div>{tshirt.size}</div>
                     <div>€ {tshirt.price}</div>
                   </div>
                 </div>
@@ -253,8 +253,24 @@ export default function ListTshirts(props) {
   );
 }
 
-export function getServerSideProps() {
+export async function getServerSideProps() {
+  const productDatabase = await getProducts();
+  // const productDatabaseOrganized = productDatabase.map((tshirt) => {
+  //   return {
+  //     id: tshirt.id,
+  //     category: tshirt.category,
+  //     color: tshirt.color,
+  //     price: tshirt.price,
+  //     size: productDatabase.filter((id) => {
+  //       id === tshirt.id &&
+  //         id.size.map((allsizes) => {
+  //           allsizes.size;
+  //         });
+  //     }),
+  //   };
+  // });
+
   return {
-    props: { tshirts: tshirtDataBase },
+    props: { tshirts: productDatabase },
   };
 }
