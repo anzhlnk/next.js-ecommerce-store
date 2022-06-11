@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
 import Cookies from 'js-cookie';
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { deleteCookie } from '../util/cookies';
 // import { useCartContext } from '../context/cartQuantity';
-import { getParsedCookie, setStringifiedCookie } from '../util/cookies';
 import { getProducts } from '../util/database';
 
 const contentAll = css`
@@ -50,7 +51,11 @@ const formParent = css`
     border: 1px solid #d8d8d8;
     margin: 8px 0px;
     font-size: 12px;
+    :focus {
+      outline-color: #ffa500;
+    }
   }
+
   button {
     margin-top: 12px;
     padding: 1px 8px;
@@ -62,8 +67,12 @@ const formParent = css`
     align-items: center;
     justify-content: center;
     background-color: #ffa500;
-    border-color: #ffffff;
     width: 220px;
+  }
+  button:hover {
+    background-image: linear-gradient(#fcb32d, #ffa500);
+    border: 1px solid #d8d8d8;
+    text-decoration: none;
   }
 `;
 
@@ -92,110 +101,184 @@ const contentRightSide = css`
 `;
 
 export default function CheckOut(props) {
-  const [combinedData, setCombinedData] = useState(props.foundgoods);
+  const combinedData = props.foundgoods;
+
+  const [values, setValues] = useState({
+    fname: '',
+    lname: '',
+    email: '',
+    address: '',
+    city: '',
+    postalCode: '',
+    country: '',
+    creditCard: '',
+    expirationDate: '',
+    securityCode: '',
+  });
+
+  const set = (name) => {
+    return ({ target: { value } }) => {
+      setValues((oldValues) => ({ ...oldValues, [name]: value }));
+    };
+  };
+
   let totalP = 0;
   for (let i = 0; i < combinedData.length; i++) {
     totalP += combinedData[i].quantity * combinedData[i].price;
   }
 
-  return (
-    <div css={contentAll}>
-      {/* prevent submission with any of the above fields being empty */}
-      {/* Show total */}
-      {/* shipping and payment information */}
+  const onSubmit = (event) => {
+    event.preventDefault();
+    window.location.href = '/thankyou';
+    // Cookies.remove('cart');
+    deleteCookie('cart');
+  };
 
-      <div css={heading}>
-        <Link href="/">
-          <div>
-            <Image
-              src="/homeLogo.png"
-              width="30"
-              height="30"
-              alt=" home Logo"
-            />
-          </div>
-        </Link>
-        <h1>/ Customer details </h1>
-      </div>
-      <div css={contentMain}>
-        <div css={formParent}>
-          <h2>Customer details</h2>
-          <form className="form">
-            <div className="inputBoxes">
-              <input
-                data-test-id="checkout-first-name"
-                placeholder="first name "
-              />
-              <input
-                data-test-id="checkout-last-name"
-                placeholder="last name "
-              />
-              <input data-test-id="checkout-email" placeholder="email" />
-              <input data-test-id="checkout-address" placeholder="address" />
-              <input data-test-id="checkout-city" placeholder="city" />
-              <input
-                data-test-id="checkout-postal-code"
-                placeholder="postal code"
-              />
-              <input ata-test-id="checkout-country" placeholder="country" />
-              <input
-                data-test-id="checkout-credit-card"
-                placeholder="credit card"
-              />
-              <input
-                data-test-id="checkout-expiration-date"
-                placeholder="expiration date"
+  return (
+    <>
+      <Head>
+        <title>Customer details | orange orange</title>
+        <meta name="description" content="Payment and shipping details" />
+      </Head>
+      <div css={contentAll}>
+        <div css={heading}>
+          <Link href="/">
+            <div>
+              <Image
+                src="/homeLogo.png"
+                width="30"
+                height="30"
+                alt=" home Logo"
               />
             </div>
-            <input
-              data-test-id="checkout-security-code"
-              placeholder="security code"
-            />
-            <Link href="/thankyou">
+          </Link>
+          <h1>/ Customer details </h1>
+        </div>
+        <div css={contentMain}>
+          <div css={formParent}>
+            <h2>Customer details</h2>
+            <form className="form" onSubmit={onSubmit}>
+              <div className="inputBoxes">
+                <input
+                  data-test-id="checkout-first-name"
+                  placeholder="first name"
+                  value={values.fname}
+                  onChange={set('fname')}
+                  required
+                />
+                <input
+                  data-test-id="checkout-last-name"
+                  placeholder="last name"
+                  value={values.lname}
+                  onChange={set('lname')}
+                  required
+                />
+                <input
+                  data-test-id="checkout-email"
+                  placeholder="email"
+                  value={values.email}
+                  onChange={set('email')}
+                  required
+                />
+                <input
+                  data-test-id="checkout-address"
+                  placeholder="address"
+                  value={values.address}
+                  onChange={set('address')}
+                  required
+                />
+                <input
+                  data-test-id="checkout-city"
+                  placeholder="city"
+                  value={values.city}
+                  onChange={set('city')}
+                  required
+                />
+                <input
+                  data-test-id="checkout-postal-code"
+                  placeholder="postal code"
+                  value={values.postalCode}
+                  onChange={set('postalCode')}
+                  required
+                />
+                <input
+                  ata-test-id="checkout-country"
+                  placeholder="country"
+                  value={values.country}
+                  onChange={set('country')}
+                  required
+                />
+                <input
+                  data-test-id="checkout-credit-card"
+                  placeholder="credit card"
+                  value={values.creditCard}
+                  onChange={set('creditCard')}
+                  type="number"
+                  required
+                />
+                <input
+                  data-test-id="checkout-expiration-date"
+                  placeholder="expiration date"
+                  value={values.expirationDate}
+                  onChange={set('expirationDate')}
+                  type="number"
+                  required
+                />
+              </div>
+              <input
+                data-test-id="checkout-security-code"
+                placeholder="security code"
+                value={values.securityCode}
+                onChange={set('securityCode')}
+                type="number"
+                required
+              />
+              {/* <Link href="/thankyou"> */}
               <div>
                 <button data-test-id="checkout-confirm-order">
                   Confirm order
                 </button>
               </div>
-            </Link>
-          </form>
-        </div>
-        <div css={contentRightSide}>
-          <div>
-            <h2 className="total">Total: € {totalP}</h2>
-            {totalP < 30 && (
-              <span className="hiddenText">
-                Free delivery if you add €{30 - totalP} to the shopping bag
-              </span>
-            )}
-            {totalP < 30 ? (
-              <span> Delivery costs: €30 </span>
-            ) : (
-              <span>Delivery costs: free of charge </span>
-            )}
-            <hr />
-            <h2 className="grandTotal">
-              Total: € {totalP < 30 ? totalP + 30 : totalP}{' '}
-            </h2>
+              {/* </Link> */}
+            </form>
           </div>
-          <div>
-            {combinedData.map((item) => {
-              return (
-                <div key={`checkout-${item.id}`}>
-                  <Image
-                    src={`/${item.id}.jpg`}
-                    alt="product image"
-                    width="65"
-                    height="98"
-                  />{' '}
-                  x {item.quantity}
-                </div>
-              );
-            })}
+          <div css={contentRightSide}>
+            <div>
+              <h2 className="total">Total: € {totalP}</h2>
+              {totalP < 30 && (
+                <span className="hiddenText">
+                  Free delivery if you add €{30 - totalP} to the shopping bag
+                </span>
+              )}
+              {totalP < 30 ? (
+                <span> Delivery costs: €30 </span>
+              ) : (
+                <span>Delivery costs: free of charge </span>
+              )}
+              <hr />
+              <h2 className="grandTotal">
+                Total: € {totalP < 30 ? totalP + 30 : totalP}{' '}
+              </h2>
+            </div>
+            <div>
+              {combinedData.map((item) => {
+                return (
+                  <div key={`checkout-${item.id}`}>
+                    <Image
+                      src={`/${item.id}.jpg`}
+                      alt="product image"
+                      width="65"
+                      height="98"
+                    />{' '}
+                    x {item.quantity}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -205,23 +288,24 @@ export async function getServerSideProps(context) {
 
   // 2. get the objects from the cookies in the database
   const productDatabase = await getProducts();
-  let foundgoods = [];
 
-  for (const item of currentCart) {
+  const foundgoods = [];
+
+  for (const cartItem of currentCart) {
     // query tshirtDataBase to find id of current cart item
-    const tshirtData = productDatabase.find((tshirt) => {
-      return tshirt.id === item.id;
+    const productDataFromDB = productDatabase.find((product) => {
+      return product.id === cartItem.id;
     });
 
-    if (!tshirtData) {
+    if (!productDataFromDB) {
       alert(
-        `Error occured: Could not find cart item t shirt id ${item.id} in tshirtDataBase`,
+        `Error occured: Could not find cart item id ${cartItem.id} in DataBase`,
       );
       context.res.statusCode = 404;
       break;
     }
     // 4. create a new object adding the properties from the cookie object to the tshirt in database
-    const superTshirt = { ...tshirtData, ...item };
+    const superTshirt = { ...productDataFromDB, ...cartItem };
 
     // 5. add to list
     foundgoods.push(superTshirt);

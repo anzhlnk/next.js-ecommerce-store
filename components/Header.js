@@ -114,8 +114,8 @@ export default function Header(props) {
           <nav>
             <Link href="/women">Women</Link>
             <Link href="/men">Men</Link>
-            <Link href="/t-shirt">All T-shirts</Link>
-            <Link href="/products">Inspiration</Link>
+            <Link href="/tshirts">All T-shirts</Link>
+            <Link href="/inspiration">Inspiration</Link>
           </nav>
         </div>
 
@@ -149,7 +149,7 @@ export default function Header(props) {
             </Link>
           </div>
           <div>
-            <Link href="/cartPage">
+            <Link href="/shopping-bag">
               <div>
                 <img
                   src="/shopping.jpeg"

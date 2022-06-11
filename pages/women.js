@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 // import Slider, { Range } from 'rc-slider';
-import { getProducts } from '../util/database';
+import { getProducts, getSizes } from '../util/database';
 
 const contentAll = css`
   margin: 100px 24px 96px;
@@ -93,14 +94,6 @@ const categoryCheckbox = css`
   }
 `;
 
-const priceSlider = css`
-  padding: 24px 0px 24px 0px;
-  width: 310px;
-  border: 1px solid #e6e6e6;
-  padding: 10px 64px;
-  margin-bottom: 13px;
-`;
-
 const tshirtListStyles = css`
   display: flex;
   flex-wrap: wrap;
@@ -126,139 +119,185 @@ const tshirtListItemStyles = css`
     align-items: center;
   }
 `;
+const sizesAll = css`
+  display: flex;
+  flex-direction: row;
+`;
+const tshirts = (isAvailable) => css`
+  color: ${isAvailable ? '#121314' : '#a9a8a8'};
+  padding-right: 12px;
+`;
 
 export default function ListTshirtsWoman(props) {
+  let isAvailable = false;
   return (
-    <div css={contentAll}>
-      <div css={heading}>
-        <Link href="/">
-          <div>
-            <Image
-              src="/homeLogo.png"
-              width="30"
-              height="30"
-              alt=" home Logo"
-            />
-          </div>
-        </Link>
-        <h1>/ Women </h1>
-      </div>
-      <div css={content}>
-        <div css={contentLeftSide}>
-          <div css={categoryCheckbox}>
-            <p>Category</p>
-            <div className="checkboxContent">
-              <label>
-                <input type="checkbox" />
-                <span>Women</span>
-              </label>
-              <label>
-                <input type="checkbox" />
-                <span>Men</span>
-              </label>
-            </div>
-          </div>
-          <div css={priceSlider}>Price</div>
-          {/* <Slider min="0" max="50" defaultValue={[0, 50]} minDistance={3} /> */}
-          <div css={categoryCheckbox}>
-            <p>Size</p>
-            <div className="checkboxContent">
-              <label>
-                <input type="checkbox" />
-                <span>XS</span>
-              </label>
-              <label>
-                <input type="checkbox" />
-                <span>S</span>
-              </label>
-              <label>
-                <input type="checkbox" />
-                <span>M</span>
-              </label>
-              <label>
-                <input type="checkbox" />
-                <span>L</span>
-              </label>
-              <label>
-                <input type="checkbox" />
-                <span>XL</span>
-              </label>
-              <label>
-                <input type="checkbox" />
-                <span>XXL</span>
-              </label>
-            </div>
-          </div>
-          <div css={categoryCheckbox}>
-            <p>Color</p>
-            <div className="checkboxContent">
-              <label>
-                <input type="checkbox" style={{ backgroundColor: 'red' }} />
-                <span>White</span>
-              </label>
-              <label>
-                <input type="checkbox" />
-                <span>Brown</span>
-              </label>
-              <label>
-                <input type="checkbox" />
-                <span>Grey</span>
-              </label>
-              <label>
-                <input type="checkbox" />
-                <span>Pink</span>
-              </label>
-            </div>
-          </div>
-        </div>
-        <div css={contentRighSide}>
-          <div className="contentTop">
-            <h1>Women T-shirts</h1>
+    <>
+      <Head>
+        <title>Women T-shirts | orange orange</title>
+        <meta name="description" content="Women T-shirts" />
+      </Head>
+      <div css={contentAll}>
+        <div css={heading}>
+          <Link href="/">
             <div>
-              <span>Sort by: </span>
-              <select>
-                <option>Popular</option>
-                <option>New</option>
-                <option>Popular</option>
-              </select>
+              <Image
+                src="/homeLogo.png"
+                width="30"
+                height="30"
+                alt=" home Logo"
+              />
+            </div>
+          </Link>
+          <h1>/ Women </h1>
+        </div>
+        <div css={content}>
+          <div css={contentLeftSide}>
+            <div css={categoryCheckbox}>
+              <p>Category</p>
+              <div className="checkboxContent">
+                <label>
+                  <input type="checkbox" />
+                  <span>Women</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span>Men</span>
+                </label>
+              </div>
+            </div>
+            <div css={categoryCheckbox}>
+              <p>Price</p>
+              <div className="checkboxContent">
+                <label>
+                  <input type="checkbox" />
+                  <span>€1- €30</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span>€31-€40</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span>€41-€50</span>
+                </label>
+              </div>
+            </div>
+            <div css={categoryCheckbox}>
+              <p>Size</p>
+              <div className="checkboxContent">
+                <label>
+                  <input type="checkbox" />
+                  <span>XS</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span>S</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span>M</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span>L</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span>XL</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span>XXL</span>
+                </label>
+              </div>
+            </div>
+            <div css={categoryCheckbox}>
+              <p>Color</p>
+              <div className="checkboxContent">
+                <label>
+                  <input type="checkbox" style={{ backgroundColor: 'red' }} />
+                  <span>White</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span>Brown</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span>Grey</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span>Pink</span>
+                </label>
+              </div>
             </div>
           </div>
+          <div css={contentRighSide}>
+            <div className="contentTop">
+              <h1>Women T-shirts</h1>
+              <div>
+                <span>Sort by: </span>
+                <select>
+                  <option>Popular</option>
+                  <option>New</option>
+                  <option>Popular</option>
+                </select>
+              </div>
+            </div>
 
-          <div css={tshirtListStyles}>
-            {props.tshirts.map((tshirt) => {
-              if (tshirt.category === 'woman') {
-                return (
-                  <div key={`tshirt-${tshirt.id}`} css={tshirtListItemStyles}>
-                    <Link href={`/tshirts/${tshirt.id}`}>
-                      <div>
-                        <Image
-                          src={`/${tshirt.id}.jpg`}
-                          alt="product image"
-                          width="262"
-                          height="393"
-                        />
+            <div css={tshirtListStyles}>
+              {props.productDatabase.map((tshirt) => {
+                if (tshirt.category === 'woman') {
+                  return (
+                    <div key={`tshirt-${tshirt.id}`} css={tshirtListItemStyles}>
+                      <Link href={`/tshirts/${tshirt.id}`}>
+                        <div>
+                          <Image
+                            src={`/${tshirt.id}.jpg`}
+                            alt="product image"
+                            width="262"
+                            height="393"
+                          />
+                        </div>
+                      </Link>
+                      <div>{tshirt.name}</div>
+                      <div className="itemInfo">
+                        <div css={sizesAll}>
+                          {/* {tshirt.size} */}
+                          {props.sizeDatabase.map((oneSize) => {
+                            oneSize.size === tshirt.size
+                              ? (isAvailable = true)
+                              : (isAvailable = false);
+                            return (
+                              <div
+                                key={`availableSize-${oneSize.size}`}
+                                css={tshirts(isAvailable)}
+                              >
+                                {oneSize.size}
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div>€ {tshirt.price}</div>
                       </div>
-                    </Link>
-                    <div>{tshirt.name}</div>
-                    <div className="itemInfo">
-                      <div>{tshirt.size}</div>
-                      <div>€ {tshirt.price}</div>
                     </div>
-                  </div>
-                );
-              }
-            })}
+                  );
+                }
+              })}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
 export async function getServerSideProps() {
   const productDatabase = await getProducts();
-  console.log(productDatabase);
+  const sizeDatabase = await getSizes();
+  console.log(sizeDatabase);
   return {
-    props: { tshirts: productDatabase },
+    props: { productDatabase: productDatabase, sizeDatabase: sizeDatabase },
   };
 }

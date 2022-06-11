@@ -1,5 +1,6 @@
 import { css, Global } from '@emotion/react';
 import Cookies from 'js-cookie';
+import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import { getLocalStorage, setLocalStorage } from '../util/localStorage';
@@ -95,7 +96,12 @@ function MyApp({ Component, pageProps }) {
           }
         `}
       />
-
+      <Head>
+        {' '}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/icon-apple-touch.png" />
+        <link rel="manifest" href="/manifest.json" />
+      </Head>
       <Layout cartQ={cartQ}>
         <Component {...pageProps} setCartQ={setCartQ} />
       </Layout>
