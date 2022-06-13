@@ -155,6 +155,7 @@ export default function Header(props) {
                   src="/shopping.jpeg"
                   className="cartIcon"
                   alt="shopping bag icon"
+                  data-test-id="cart-link"
                 />
 
                 <span>Shopping bag</span>
@@ -162,8 +163,7 @@ export default function Header(props) {
             </Link>
           </div>
           <div className="iconQuantity">
-            {' '}
-            <div>{totalQ > 0 ? totalQ : '  '}</div>
+            <div data-test-id="cart-count">{totalQ > 0 ? totalQ : '  '}</div>
           </div>
         </div>
       </div>

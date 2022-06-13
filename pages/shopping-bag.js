@@ -244,13 +244,16 @@ export default function CartPage(props) {
         </div>
         <div css={contentMain}>
           {combinedData.length === 0 ? (
-            <h1>Your Cart is Empty!</h1>
+            <h2>Your Cart is Empty!</h2>
           ) : (
             <>
               <div css={tshirtsInCartParent}>
                 {combinedData.map((item) => {
                   return (
-                    <div key={`cart-${item.id}`}>
+                    <div
+                      key={`cart-${item.id}`}
+                      data-test-id="cart-product-<product id>"
+                    >
                       <div css={tshirtsInCart}>
                         <Link href={`/tshirts/${item.id}`}>
                           <div css={productImage}>
@@ -327,6 +330,7 @@ export default function CartPage(props) {
                                   // 4. set the new cookie
                                   setStringifiedCookie('cart', currentCart);
                                 }}
+                                data-test-id="increase-button"
                               >
                                 +
                               </button>
@@ -365,12 +369,16 @@ export default function CartPage(props) {
                                 // 5. set the new cookie
                                 setStringifiedCookie('cart', updatedCart);
                               }}
+                              data-test-id="cart-product-remove-<product id>"
                             >
                               x
                             </button>
                           </div>
                           <p>
-                            {item.quantity} x € {item.price}
+                            <span data-test-id="cart-product-quantity-<product id>">
+                              {item.quantity}
+                            </span>{' '}
+                            x € {item.price}
                           </p>
                           <p className="totalPrice">
                             € {item.quantity * item.price}
@@ -410,7 +418,9 @@ export default function CartPage(props) {
                 </div>
                 <Link href="/checkout">
                   <div>
-                    <button css={checkoutButton}>Checkout</button>{' '}
+                    <button css={checkoutButton} data-test-id="cart-checkout">
+                      Checkout
+                    </button>{' '}
                   </div>
                 </Link>
               </div>

@@ -76,7 +76,7 @@ export default function Inspiration() {
               />
             </div>
           </Link>
-          <h1>/ Order complete </h1>
+          <h1>/ Inspiration </h1>
         </div>
         <div css={content}>
           <div css={contentMain}>

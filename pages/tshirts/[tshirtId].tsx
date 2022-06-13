@@ -240,12 +240,15 @@ export default function Tshirt(props: Props) {
                 alt="product image"
                 width="262"
                 height="393"
+                data-test-id="product-image"
               />
             </div>
             <div css={contentRightSide}>
               <h1>
                 {props.superTshirt.name}
-                <br />€ {props.superTshirt.price}
+                <div data-test-id="product-price">
+                  € {props.superTshirt.price}
+                </div>
               </h1>
               <p className="refferrence">REF:{props.superTshirt.id}</p>
               <p className="helpSize">Help about your size</p>
@@ -275,7 +278,7 @@ export default function Tshirt(props: Props) {
                   >
                     -
                   </button>
-                  <span>{counter}</span>
+                  <span data-test-id="product-quantity">{counter}</span>
                   <button
                     type="button"
                     className="quantityButton"
@@ -313,6 +316,7 @@ export default function Tshirt(props: Props) {
                     setStringifiedCookie('cart', newCart);
                     props.setCartQ(newCart);
                   }}
+                  data-test-id="product-add-to-cart"
                 >
                   Add to shopping bag
                 </button>

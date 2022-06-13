@@ -202,7 +202,7 @@ export default function CheckOut(props) {
                   required
                 />
                 <input
-                  ata-test-id="checkout-country"
+                  data-test-id="checkout-country"
                   placeholder="country"
                   value={values.country}
                   onChange={set('country')}
@@ -221,7 +221,6 @@ export default function CheckOut(props) {
                   placeholder="expiration date"
                   value={values.expirationDate}
                   onChange={set('expirationDate')}
-                  type="number"
                   required
                 />
               </div>
