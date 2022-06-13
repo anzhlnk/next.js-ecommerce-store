@@ -16,7 +16,7 @@ test('add to cart test', async ({ page }) => {
   // click on the cart link
   await cartInHeader.click();
   // go to the cart page
-  await page.waitForNavigation({ url: `${baseUrl}shopping-bag` });
+  // await page.waitForNavigation({ url: `${baseUrl}shopping-bag` });
   //  check the url
   await expect(page).toHaveURL(`${baseUrl}shopping-bag`);
   // find increase Q button  by id
