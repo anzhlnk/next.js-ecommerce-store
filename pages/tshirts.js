@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 // import Slider, { Range } from 'rc-slider';
 import { getProducts, getSizes } from '../util/database';
 
@@ -249,10 +248,14 @@ export default function ListTshirts(props) {
               </div>
             </div>
 
-            <div css={tshirtListStyles} >
+            <div css={tshirtListStyles}>
               {props.productDatabase.map((tshirt) => {
                 return (
-                  <div key={`tshirt-${tshirt.id}`} css={tshirtListItemStyles} data-test-id="product-<product id>">
+                  <div
+                    key={`tshirt-${tshirt.id}`}
+                    css={tshirtListItemStyles}
+                    data-test-id="product-<product id>"
+                  >
                     <Link href={`/tshirts/${tshirt.id}`}>
                       <div>
                         <Image

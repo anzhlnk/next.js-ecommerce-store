@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import Cookies from 'js-cookie';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -152,7 +151,7 @@ export default function CheckOut(props) {
               />
             </div>
           </Link>
-          <p>/ Customer details </p1>
+          <p>/ Customer details </p>
         </div>
         <div css={contentMain}>
           <div css={formParent}>
