@@ -15,9 +15,7 @@ test('add to cart test', async ({ page }) => {
   const cartInHeader = await page.locator('data-test-id=cart-link');
   // click on the cart link
   await cartInHeader.click();
-  // go to the cart page
-  // await page.waitForNavigation({ url: `${baseUrl}shopping-bag` });
-  //  check the url
+  //  go to the cart page, check the url
   await expect(page).toHaveURL(`${baseUrl}shopping-bag`);
   // find increase Q button  by id
   const increaseQInCart = await page.locator('data-test-id=increase-button');

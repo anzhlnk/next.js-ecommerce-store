@@ -9,15 +9,12 @@ test('Checkout flow, payment page, thank you page', async ({ page }) => {
   await page.locator('text=Add to shopping bag').click();
   // define the cart link
   const cartInHeader = await page.locator('data-test-id=cart-link');
-  // click on the cart link
+  // go to the cart page by clicking on the cart link
   await cartInHeader.click();
-  // go to the cart page
-  await page.waitForNavigation({ url: `${baseUrl}shopping-bag` });
   // find the checkoutt button  by id
   const checkoutButton = await page.locator('data-test-id=cart-checkout');
   // click on the + button
   await checkoutButton.click();
-  await page.waitForNavigation({ url: `${baseUrl}checkout` });
   //  check the url
   await expect(page).toHaveURL(`${baseUrl}checkout`);
   // press confirm the order button before entering the info
@@ -38,7 +35,6 @@ test('Checkout flow, payment page, thank you page', async ({ page }) => {
 
   // after entering the data, press confirm order
   await confirmOrderButton.click();
-  await page.waitForNavigation({ url: `${baseUrl}thankyou` });
   //  check the url
   await expect(page).toHaveURL(`${baseUrl}thankyou`);
 });
