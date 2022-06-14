@@ -28,13 +28,11 @@ test('add to cart test', async ({ page }) => {
 
   // check the quantity in the cart
   const productQ = await page.locator(
-    'data-test-id=cart-product-quantity-<product id>',
+    '[data-test-id^="cart-product-quantity-"]',
   );
   await expect(productQ).toHaveText('4');
   // find the delete button by  its id and delete the product
-  const deleteQ = await page.locator(
-    'data-test-id=cart-product-remove-<product id>',
-  );
+  const deleteQ = await page.locator('[data-test-id^="cart-product-remove-"]');
   await deleteQ.click();
   await expect(countInHeader).toHaveText(' ');
   const titleLocator = await page.locator('h2');
