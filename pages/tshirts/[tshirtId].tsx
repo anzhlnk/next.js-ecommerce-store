@@ -50,6 +50,11 @@ const contentRightSide = css`
   justify-content: space-between;
   align-items: flex-start;
 
+  .productPrice {
+    display: flex;
+    flex-direction: row;
+  }
+
   h1 {
     margin: 0px;
     font-size: 24px;
@@ -231,10 +236,12 @@ export default function Tshirt(props: Props) {
             </div>
             <div css={contentRightSide}>
               <h1>{props.superTshirt.name} </h1>
-              <div data-test-id="product-price">
-                € {props.superTshirt.price}
+              <div className="productPrice">
+                €{' '}
+                <div data-test-id="product-price">
+                  {props.superTshirt.price}
+                </div>
               </div>
-
               <p className="refferrence">REF:{props.superTshirt.id}</p>
               <p className="helpSize">Help about your size</p>
               <p className="dropdown">
@@ -307,9 +314,7 @@ export default function Tshirt(props: Props) {
                 </button>
                 <button className="wishlist">♡</button>
               </div>
-
               {/* Cookies end */}
-
               <div className="additionalInfo">
                 <p> ✓ Free delivery to store</p>
                 <p> 📍 Store availability</p>
