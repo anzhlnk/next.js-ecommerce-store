@@ -252,7 +252,7 @@ export default function CartPage(props) {
                   return (
                     <div
                       key={`cart-${item.id}`}
-                      data-test-id="cart-product-<product id>"
+                      data-test-id={`cart-product-${item.id}`}
                     >
                       <div css={tshirtsInCart}>
                         <Link href={`/tshirts/${item.id}`}>
@@ -369,15 +369,17 @@ export default function CartPage(props) {
                                 // 5. set the new cookie
                                 setStringifiedCookie('cart', updatedCart);
                               }}
-                              data-test-id="cart-product-remove-<product id>"
+                              data-test-id={`cart-product-remove-${item.id}`}
                             >
                               x
                             </button>
                           </div>
                           <p>
-                            <span data-test-id="cart-product-quantity-<product id>">
+                            <span
+                              data-test-id={`cart-product-quantity-${item.id}`}
+                            >
                               {item.quantity}
-                            </span>{' '}
+                            </span>
                             x € {item.price}
                           </p>
                           <p className="totalPrice">

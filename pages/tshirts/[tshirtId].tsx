@@ -140,6 +140,10 @@ const contentRightSide = css`
     margin-right: 18px;
   }
 
+  .quantityInput {
+    width: 48px;
+  }
+
   .quantityButtonParent button {
     border: none;
     background: none;
@@ -270,7 +274,24 @@ export default function Tshirt(props: Props) {
                   >
                     -
                   </button>
-                  <span data-test-id="product-quantity">{counter}</span>
+
+                  <input
+                    type="number"
+                    className="quantityInput"
+                    data-test-id="product-quantity"
+                    min="1"
+                    defaultValue="1"
+                    value={counter}
+                    onInput={(event) => {
+                      if (!event.currentTarget.validity.valid) {
+                        event.currentTarget.value = '';
+                      }
+                    }}
+                    onChange={(event) =>
+                      setCounter(Number(event.currentTarget.value))
+                    }
+                  />
+
                   <button
                     type="button"
                     className="quantityButton"
