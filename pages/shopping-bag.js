@@ -398,8 +398,8 @@ export default function CartPage(props) {
                     ({totalQ} {totalQ > 1 ? 'items' : 'item'}){' '}
                   </span>
                 </h2>
-                <h2 className="total" data-test-id="cart-total">
-                  Total: € {totalP}
+                <h2 className="total">
+                  Total: € <div data-test-id="cart-total">{totalP}</div>
                 </h2>
                 {totalP < 30 && (
                   <span className="hiddenText">
