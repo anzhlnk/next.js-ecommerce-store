@@ -254,7 +254,7 @@ export default function ListTshirts(props) {
                   <div
                     key={`tshirt-${tshirt.id}`}
                     css={tshirtListItemStyles}
-                    data-test-id="product-<product id>"
+                    data-test-id={`product-${tshirt.id}`}
                   >
                     <Link href={`/tshirts/${tshirt.id}`}>
                       <div>
