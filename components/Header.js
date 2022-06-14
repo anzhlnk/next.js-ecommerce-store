@@ -114,8 +114,8 @@ export default function Header(props) {
           <nav>
             <Link href="/women">Women</Link>
             <Link href="/men">Men</Link>
-            <Link href="/tshirts" data-test-id="products-link">
-              All T-shirts
+            <Link href="/tshirts">
+              <a data-test-id="products-link"> All T-shirts </a>
             </Link>
             <Link href="/inspiration">Inspiration</Link>
           </nav>
