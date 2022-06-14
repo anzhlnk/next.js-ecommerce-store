@@ -251,41 +251,39 @@ export default function ListTshirts(props) {
             <div css={tshirtListStyles}>
               {props.productDatabase.map((tshirt) => {
                 return (
-                  <div
-                    key={`tshirt-${tshirt.id}`}
-                    css={tshirtListItemStyles}
-                    data-test-id={`product-${tshirt.id}`}
-                  >
-                    <Link href={`/tshirts/${tshirt.id}`}>
-                      <div>
-                        <Image
-                          src={`/${tshirt.id}.jpg`}
-                          alt="product image"
-                          width="262"
-                          height="393"
-                        />
+                  <div key={`tshirt-${tshirt.id}`} css={tshirtListItemStyles}>
+                    <a data-test-id={`product-${tshirt.id}`}>
+                      <Link href={`/tshirts/${tshirt.id}`}>
+                        <div>
+                          <Image
+                            src={`/${tshirt.id}.jpg`}
+                            alt="product image"
+                            width="262"
+                            height="393"
+                          />
+                        </div>
+                      </Link>
+                      <div>{tshirt.name}</div>
+                      <div className="itemInfo">
+                        <div css={sizesAll}>
+                          {/* {tshirt.size} */}
+                          {props.sizeDatabase.map((oneSize) => {
+                            oneSize.size === tshirt.size
+                              ? (isAvailable = true)
+                              : (isAvailable = false);
+                            return (
+                              <div
+                                key={`availableSize-${oneSize.size}`}
+                                css={tshirts(isAvailable)}
+                              >
+                                {oneSize.size}
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div>€ {tshirt.price}</div>
                       </div>
-                    </Link>
-                    <div>{tshirt.name}</div>
-                    <div className="itemInfo">
-                      <div css={sizesAll}>
-                        {/* {tshirt.size} */}
-                        {props.sizeDatabase.map((oneSize) => {
-                          oneSize.size === tshirt.size
-                            ? (isAvailable = true)
-                            : (isAvailable = false);
-                          return (
-                            <div
-                              key={`availableSize-${oneSize.size}`}
-                              css={tshirts(isAvailable)}
-                            >
-                              {oneSize.size}
-                            </div>
-                          );
-                        })}
-                      </div>
-                      <div>€ {tshirt.price}</div>
-                    </div>
+                    </a>
                   </div>
                 );
               })}
