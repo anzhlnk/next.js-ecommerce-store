@@ -24,7 +24,7 @@ const heading = css`
   flex-direction: row;
   padding: 29px 0 35px;
 
-  h1 {
+  p {
     padding-left: 18px;
     font-size: 13px;
     color: #b2b2b2;
@@ -152,7 +152,7 @@ export default function CheckOut(props) {
               />
             </div>
           </Link>
-          <h1>/ Customer details </h1>
+          <p>/ Customer details </p1>
         </div>
         <div css={contentMain}>
           <div css={formParent}>

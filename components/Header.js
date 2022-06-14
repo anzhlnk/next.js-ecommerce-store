@@ -114,7 +114,9 @@ export default function Header(props) {
           <nav>
             <Link href="/women">Women</Link>
             <Link href="/men">Men</Link>
-            <Link href="/tshirts">All T-shirts</Link>
+            <Link href="/tshirts" data-test-id="products-link">
+              All T-shirts
+            </Link>
             <Link href="/inspiration">Inspiration</Link>
           </nav>
         </div>
@@ -170,17 +172,3 @@ export default function Header(props) {
     </header>
   );
 }
-
-// export function getServerSideProps(context) {
-//   // 1. Get the value of the cookie from the request object
-//   const originalCart = JSON.parse(context.req.cookies.cart || '[]');
-//   const quantityInCart = originalCart.map((item) => {
-//     return item.quantity;
-//   });
-//   console.log('here it is', quantityInCart);
-//   return {
-//     props: {
-//       quantityInCart: quantityInCart,
-//     },
-//   };
-// }

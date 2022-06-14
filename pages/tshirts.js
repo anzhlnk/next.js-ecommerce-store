@@ -18,7 +18,7 @@ const heading = css`
     cursor: pointer;
   }
 
-  h1 {
+  p {
     padding-left: 18px;
     font-size: 13px;
     color: #b2b2b2;
@@ -132,35 +132,6 @@ const tshirts = (isAvailable) => css`
 
 export default function ListTshirts(props) {
   let isAvailable = false;
-
-  // const [xs, setXs] = useState(false);
-  // const [s, setS] = useState(false);
-  // const [m, setM] = useState(false);
-  // const [l, setL] = useState(false);
-  // const [xl, setXl] = useState(false);
-  // const [xxl, setXxl] = useState(false);
-
-  // const [size, setSize] = useState({
-  //   xs: false,
-  //   s: false,
-  //   m: false,
-  //   l: false,
-  //   xl: false,
-  //   xxl: false,
-  // });
-  // const [allsizes, setAllSizes] = useState({});
-  // useEffect(() => {
-  //   setAllSizes({ xs: xs, s: s, m: m, l: l, xl: xl, xxl: xxl });
-  // }, [xs, s, m, l, xl, xxl]);
-
-  // const [sizes, setSizes] = useState([]);
-  // useEffect(() => {
-  //   async function handleTShirtSizeChange(e) {
-  //     const { value, checked } = await e.target;
-  //   }
-  //   handleTShirtSizeChange().catch(console.log('UseEffect error'));
-  // }, [sizes]);
-
   return (
     <>
       <Head>
@@ -179,7 +150,7 @@ export default function ListTshirts(props) {
               />
             </div>
           </Link>
-          <h1>/ All T-Shirts</h1>
+          <p>/ All T-Shirts</p>
         </div>
         <div css={content}>
           <div css={contentLeftSide}>
@@ -218,27 +189,27 @@ export default function ListTshirts(props) {
 
               <div className="checkboxContent">
                 <label>
-                  {/* <input type="checkbox" onChange={setXs(!xs)} /> */}
+                  <input type="checkbox" />
                   <span>XS</span>
                 </label>
                 <label>
-                  {/* <input type="checkbox" onChange={setS(!s)} /> */}
+                  <input type="checkbox" />
                   <span>S</span>
                 </label>
                 <label>
-                  {/* <input type="checkbox" onChange={setM(!m)} /> */}
+                  <input type="checkbox" />
                   <span>M</span>
                 </label>
                 <label>
-                  {/* <input type="checkbox" onChange={setL(!l)} /> */}
+                  <input type="checkbox" />
                   <span>L</span>
                 </label>
                 <label>
-                  {/* <input type="checkbox" onChange={setXl(!xl)} /> */}
+                  <input type="checkbox" />
                   <span>XL</span>
                 </label>
                 <label>
-                  {/* <input type="checkbox" onChange={setXxl(!xxl)} /> */}
+                  <input type="checkbox" />
                   <span>XXL</span>
                 </label>
               </div>
@@ -278,10 +249,10 @@ export default function ListTshirts(props) {
               </div>
             </div>
 
-            <div css={tshirtListStyles}>
+            <div css={tshirtListStyles} >
               {props.productDatabase.map((tshirt) => {
                 return (
-                  <div key={`tshirt-${tshirt.id}`} css={tshirtListItemStyles}>
+                  <div key={`tshirt-${tshirt.id}`} css={tshirtListItemStyles} data-test-id="product-<product id>">
                     <Link href={`/tshirts/${tshirt.id}`}>
                       <div>
                         <Image

@@ -16,7 +16,7 @@ const heading = css`
   flex-direction: row;
   padding: 29px 0 35px;
 
-  h1 {
+  p {
     padding-left: 18px;
     font-size: 13px;
     color: #b2b2b2;
@@ -240,7 +240,7 @@ export default function CartPage(props) {
               />
             </div>
           </Link>
-          <h1>/ Shopping bag </h1>
+          <p>/ Shopping bag </p>
         </div>
         <div css={contentMain}>
           {combinedData.length === 0 ? (
@@ -396,7 +396,9 @@ export default function CartPage(props) {
                     ({totalQ} {totalQ > 1 ? 'items' : 'item'}){' '}
                   </span>
                 </h2>
-                <h2 className="total">Total: € {totalP}</h2>
+                <h2 className="total" data-test-id="cart-total">
+                  Total: € {totalP}
+                </h2>
                 {totalP < 30 && (
                   <span className="hiddenText">
                     Free delivery if you add €{30 - totalP} to the shopping bag

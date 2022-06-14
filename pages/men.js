@@ -17,7 +17,7 @@ const heading = css`
     cursor: pointer;
   }
 
-  h1 {
+  p {
     padding-left: 18px;
     font-size: 13px;
     color: #b2b2b2;
@@ -149,7 +149,7 @@ export default function ListTshirtsMen(props) {
               />
             </div>
           </Link>
-          <h1>/ Men</h1>
+          <p>/ Men</p>
         </div>
         <div css={content}>
           <div css={contentLeftSide}>

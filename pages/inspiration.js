@@ -29,7 +29,7 @@ const heading = css`
   flex-direction: row;
   padding: 29px 0 35px;
 
-  h1 {
+  p {
     padding-left: 18px;
     font-size: 13px;
     color: #b2b2b2;
@@ -76,7 +76,7 @@ export default function Inspiration() {
               />
             </div>
           </Link>
-          <h1>/ Inspiration </h1>
+          <p>/ Inspiration </p>
         </div>
         <div css={content}>
           <div css={contentMain}>

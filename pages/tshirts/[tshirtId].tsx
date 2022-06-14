@@ -32,7 +32,7 @@ const heading = css`
   flex-direction: row;
   padding: 29px 0 35px;
 
-  h1 {
+  p {
     padding-left: 18px;
     font-size: 13px;
     color: #b2b2b2;
@@ -198,20 +198,6 @@ export default function Tshirt(props: Props) {
   const [counter, setCounter] = useState(props.superTshirt.quantity || 1);
   const [size, setSize] = useState('');
 
-  // if (!props.superTshirt) {
-  //   return (
-  //     <div>
-  //       <Head>
-  //         <title>T-shirt not found</title>
-  //         <meta
-  //           name="description"
-  //           content="Unfortunately, we have had trouble finding the t-shirt you are looking for."
-  //         />
-  //       </Head>
-  //       <h1>Product not found</h1>
-  //     </div>
-  //   );
-  // }
   return (
     <>
       <Head>
@@ -230,7 +216,7 @@ export default function Tshirt(props: Props) {
               />
             </div>
           </Link>
-          <h1>/ All T-Shirts / {props.superTshirt.name}</h1>
+          <p>/ All T-Shirts / {props.superTshirt.name}</p>
         </div>
         <div className="contentMainBottom">
           <div css={contentMain}>
@@ -244,12 +230,11 @@ export default function Tshirt(props: Props) {
               />
             </div>
             <div css={contentRightSide}>
-              <h1>
-                {props.superTshirt.name}
-                <div data-test-id="product-price">
-                  € {props.superTshirt.price}
-                </div>
-              </h1>
+              <h1>{props.superTshirt.name} </h1>
+              <div data-test-id="product-price">
+                € {props.superTshirt.price}
+              </div>
+
               <p className="refferrence">REF:{props.superTshirt.id}</p>
               <p className="helpSize">Help about your size</p>
               <p className="dropdown">

@@ -31,7 +31,7 @@ const heading = css`
   flex-direction: row;
   padding: 29px 0 35px;
 
-  h1 {
+  p {
     padding-left: 18px;
     font-size: 13px;
     color: #b2b2b2;
@@ -60,7 +60,7 @@ export default function CheckOut() {
   return (
     <>
       <Head>
-        <title>Your order is complete | orange orange</title>
+        <title>Thank you for your order | orange orange</title>
         <meta name="description" content="Order completed" />
       </Head>
       <div css={contentAll}>
@@ -79,7 +79,7 @@ export default function CheckOut() {
               />
             </div>
           </Link>
-          <h1>/ Order complete </h1>
+          <p>/ Order complete </p>
         </div>
         <div css={content}>
           <div css={contentMain}>
