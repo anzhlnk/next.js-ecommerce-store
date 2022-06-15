@@ -299,7 +299,6 @@ export default function Tshirt(props: Props) {
                     onChange={(event) =>
                       setCounter(Number(event.currentTarget.value))
                     }
-                    disabled
                   />
 
                   <button
