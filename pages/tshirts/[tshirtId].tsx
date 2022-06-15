@@ -150,6 +150,13 @@ const contentRightSide = css`
     padding: 0px;
     border: none;
     background-color: #ffffff;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0;
+    }
   }
 
   .quantityButtonParent button {
