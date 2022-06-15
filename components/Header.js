@@ -64,10 +64,10 @@ const headerContentStyles = css`
       width: 17px;
       height: 18px;
     }
-    div {
+    .iconText {
       display: flex;
       flex-direction: column;
-      margin-left: 16px;
+      margin-left: 32px;
       justify-content: center;
       align-items: center;
       span {
@@ -76,15 +76,18 @@ const headerContentStyles = css`
     }
   }
   .iconQuantity {
-    margin-left: 0px;
+    padding: 0px;
+    margin-left: -20px;
+    margin-top: -20px;
     border-radius: 100%;
     border: 1px solid #d8d8d8;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #f7f7f7;
-    min-width: 22px;
-    min-height: 23px;
+    min-width: 20px;
+    min-height: 12px;
+    font-size: 8px;
     div {
       margin-left: 0px;
       padding: 4px;
@@ -122,37 +125,43 @@ export default function Header(props) {
         </div>
 
         <div className="headerActions">
-          <div className="searchfield">
-            <img src="/search.jpeg" className="searchIcon" alt="search icon" />
-            <span>Search</span>
-          </div>
+          <Link href="/login">
+            <a className="iconText">
+              <img
+                src="/search.jpeg"
+                className="searchIcon"
+                alt="search icon"
+              />
+              <span>Search</span>
+            </a>
+          </Link>
           <div>
             <Link href="/login">
-              <div>
+              <a className="iconText">
                 <img
                   src="/icon.jpeg"
                   className="signinIcon"
                   alt="account icon"
                 />
                 <span>Sign in</span>
-              </div>
+              </a>
             </Link>
           </div>
           <div>
             <Link href="/">
-              <div>
+              <a className="iconText">
                 <img
                   src="/heart.jpeg"
                   className="wishlistIcon"
                   alt="wishlist icon"
                 />
                 <span>Wishlist</span>
-              </div>
+              </a>
             </Link>
           </div>
           <div>
             <Link href="/shopping-bag">
-              <div>
+              <a className="iconText">
                 <img
                   src="/shopping.jpeg"
                   className="cartIcon"
@@ -161,7 +170,7 @@ export default function Header(props) {
                 />
 
                 <span>Shopping bag</span>
-              </div>
+              </a>
             </Link>
           </div>
           <div className="iconQuantity">

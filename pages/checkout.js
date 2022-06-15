@@ -231,13 +231,11 @@ export default function CheckOut(props) {
                 type="number"
                 required
               />
-              {/* <Link href="/thankyou"> */}
               <div>
                 <button data-test-id="checkout-confirm-order">
                   Confirm order
                 </button>
               </div>
-              {/* </Link> */}
             </form>
           </div>
           <div css={contentRightSide}>
