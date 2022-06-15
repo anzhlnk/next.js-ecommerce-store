@@ -431,7 +431,7 @@ export default function CartPage(props) {
               </span>
             )}
             {totalP < 30 && totalP > 0 && <span> Delivery costs: €30 </span>}{' '}
-            {totalP > 30 && <span>Delivery costs: free of charge </span>}
+            {totalP >= 30 && <span>Delivery costs: free of charge </span>}
             <hr />
             <h2 className="grandTotal">
               Total: €{totalP < 30 && totalP > 0 ? totalP + 30 : totalP}{' '}
