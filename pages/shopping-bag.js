@@ -244,7 +244,23 @@ export default function CartPage(props) {
         </div>
         <div css={contentMain}>
           {combinedData.length === 0 ? (
-            <h2>Your Cart is Empty!</h2>
+            <>
+              <h2>Your Cart is Empty!</h2>
+              <div css={contentRightSide}>
+                <h2>
+                  Shopping bag <span>({totalQ} items)</span>
+                </h2>
+                <h2 className="total">
+                  Total: € <div data-test-id="cart-total">{totalP}</div>
+                </h2>
+                <hr />
+                <div className="additionalInfo">
+                  <p> 🚚 Free delivery for orders over €30</p>
+                  <p>↩️ Free returns in 30 days</p>
+                  <p>🔒 Secure payment</p>
+                </div>
+              </div>
+            </>
           ) : (
             <>
               <div css={tshirtsInCartParent}>

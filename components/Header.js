@@ -165,7 +165,7 @@ export default function Header(props) {
             </Link>
           </div>
           <div className="iconQuantity">
-            <div data-test-id="cart-count">{totalQ > 0 ? totalQ : '  '}</div>
+            <div data-test-id="cart-count">{totalQ}</div>
           </div>
         </div>
       </div>
