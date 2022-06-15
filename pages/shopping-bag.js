@@ -172,6 +172,8 @@ const contentRightSide = css`
     color: #b2b2b2;
   }
   .total {
+    display: flex;
+    flex-direction: row;
     margin-top: 24px;
     font-size: 18px;
     font-weight: bold;
@@ -202,10 +204,13 @@ const checkoutButton = css`
   background-color: #ffa500;
   border: 1px solid #d8d8d8;
   width: 220px;
-  :hover {
+  :hover:enabled {
     background-image: linear-gradient(#fcb32d, #ffa500);
     border: 1px solid #d8d8d8;
     text-decoration: none;
+  }
+  :disabled {
+    background-color: #d8d8d8;
   }
 `;
 
@@ -245,8 +250,8 @@ export default function CartPage(props) {
         <div css={contentMain}>
           {combinedData.length === 0 ? (
             <>
-              <h2>Your Cart is Empty!</h2>
-              <div css={contentRightSide}>
+              <h2 data-test-id="empty-cart-text">Your Cart is Empty!</h2>
+              {/* <div css={contentRightSide}>
                 <h2>
                   Shopping bag <span>({totalQ} items)</span>
                 </h2>
@@ -259,117 +264,50 @@ export default function CartPage(props) {
                   <p>↩️ Free returns in 30 days</p>
                   <p>🔒 Secure payment</p>
                 </div>
-              </div>
+              </div> */}
             </>
           ) : (
-            <>
-              <div css={tshirtsInCartParent}>
-                {combinedData.map((item) => {
-                  return (
-                    <div
-                      key={`cart-${item.id}`}
-                      data-test-id={`cart-product-${item.id}`}
-                    >
-                      <div css={tshirtsInCart}>
-                        <Link href={`/tshirts/${item.id}`}>
-                          <div css={productImage}>
-                            <Image
-                              src={`/${item.id}.jpg`}
-                              alt="product image"
-                              width="131"
-                              height="196"
-                            />
-                          </div>
-                        </Link>
-                        <div className="productInfo">
-                          <p className="itemName">{item.name}</p>
-                          <p className="refferrence">REF:{item.id} </p>
-                          <p>Color: {item.color}</p>
-                          {/* to be changed !!! */}
-                          <p>Size: {item.size}</p>
-                          <div css={buttons}>
-                            <div className="quantityButtonParent">
-                              <button
-                                className="quantityButton"
-                                onClick={() => {
-                                  const newQuantity =
-                                    item.quantity > 1 ? item.quantity - 1 : 1;
-
-                                  const updatedArray = combinedData.map((p) =>
-                                    p.id === item.id
-                                      ? { ...p, quantity: newQuantity }
-                                      : p,
-                                  );
-                                  props.setCartQ(updatedArray);
-
-                                  setCombinedData(updatedArray);
-
-                                  // 1. get the cookie
-                                  const currentCart = getParsedCookie('cart');
-                                  // 2. get the tshirt
-                                  const currentTshirt = currentCart.find(
-                                    (tshirtInCart) =>
-                                      item.id === tshirtInCart.id,
-                                  );
-                                  // 3. update the counter inside the tshirt
-                                  currentTshirt.quantity > 1
-                                    ? (currentTshirt.quantity -= 1)
-                                    : (currentTshirt.quantity = 1);
-                                  // 4. set the new cookie
-                                  setStringifiedCookie('cart', currentCart);
-                                }}
-                              >
-                                -
-                              </button>
-                              <span>{item.quantity}</span>
-                              <button
-                                className="quantityButton"
-                                onClick={() => {
-                                  const newQuantity = item.quantity + 1;
-                                  const updatedArray = combinedData.map((p) =>
-                                    p.id === item.id
-                                      ? { ...p, quantity: newQuantity }
-                                      : p,
-                                  );
-                                  setCombinedData(updatedArray);
-                                  props.setCartQ(updatedArray);
-
-                                  // 1. get the cookie
-                                  const currentCart = getParsedCookie('cart');
-                                  // 2. get the tshirt
-                                  const currentTshirt = currentCart.find(
-                                    (tshirtInCart) =>
-                                      item.id === tshirtInCart.id,
-                                  );
-                                  // 3. update the counter inside the tshirt
-                                  currentTshirt.quantity += 1;
-                                  // 4. set the new cookie
-                                  setStringifiedCookie('cart', currentCart);
-                                }}
-                                data-test-id="increase-button"
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div>
+            <div css={tshirtsInCartParent}>
+              {combinedData.map((item) => {
+                return (
+                  <div
+                    key={`cart-${item.id}`}
+                    data-test-id={`cart-product-${item.id}`}
+                  >
+                    <div css={tshirtsInCart}>
+                      <Link href={`/tshirts/${item.id}`}>
+                        <div css={productImage}>
+                          <Image
+                            src={`/${item.id}.jpg`}
+                            alt="product image"
+                            width="131"
+                            height="196"
+                          />
                         </div>
-                        <div css={priceQuantityProductInfo}>
-                          <div css={buttons}>
+                      </Link>
+                      <div className="productInfo">
+                        <p className="itemName">{item.name}</p>
+                        <p className="refferrence">REF:{item.id} </p>
+                        <p>Color: {item.color}</p>
+                        {/* to be changed !!! */}
+                        <p>Size: {item.size}</p>
+                        <div css={buttons}>
+                          <div className="quantityButtonParent">
                             <button
-                              className="deleteButton"
+                              className="quantityButton"
                               onClick={() => {
-                                // data
-                                // 1. Set item quantity to -
-                                item.quantity = 0;
-                                // 2. create new array
-                                const updatedArray = combinedData.filter(
-                                  (i) => i.quantity !== 0,
+                                const newQuantity =
+                                  item.quantity > 1 ? item.quantity - 1 : 1;
+
+                                const updatedArray = combinedData.map((p) =>
+                                  p.id === item.id
+                                    ? { ...p, quantity: newQuantity }
+                                    : p,
                                 );
-                                // 3. update the state of the data
-                                setCombinedData(updatedArray);
                                 props.setCartQ(updatedArray);
 
-                                // Cookie part
+                                setCombinedData(updatedArray);
+
                                 // 1. get the cookie
                                 const currentCart = getParsedCookie('cart');
                                 // 2. get the tshirt
@@ -377,75 +315,139 @@ export default function CartPage(props) {
                                   (tshirtInCart) => item.id === tshirtInCart.id,
                                 );
                                 // 3. update the counter inside the tshirt
-                                currentTshirt.quantity = 0;
-                                // 4. create new cart
-                                const updatedCart = currentCart.filter(
-                                  (t) => t.quantity !== 0,
-                                );
-                                // 5. set the new cookie
-                                setStringifiedCookie('cart', updatedCart);
+                                currentTshirt.quantity > 1
+                                  ? (currentTshirt.quantity -= 1)
+                                  : (currentTshirt.quantity = 1);
+                                // 4. set the new cookie
+                                setStringifiedCookie('cart', currentCart);
                               }}
-                              data-test-id={`cart-product-remove-${item.id}`}
                             >
-                              x
+                              -
+                            </button>
+                            <span>{item.quantity}</span>
+                            <button
+                              className="quantityButton"
+                              onClick={() => {
+                                const newQuantity = item.quantity + 1;
+                                const updatedArray = combinedData.map((p) =>
+                                  p.id === item.id
+                                    ? { ...p, quantity: newQuantity }
+                                    : p,
+                                );
+                                setCombinedData(updatedArray);
+                                props.setCartQ(updatedArray);
+
+                                // 1. get the cookie
+                                const currentCart = getParsedCookie('cart');
+                                // 2. get the tshirt
+                                const currentTshirt = currentCart.find(
+                                  (tshirtInCart) => item.id === tshirtInCart.id,
+                                );
+                                // 3. update the counter inside the tshirt
+                                currentTshirt.quantity += 1;
+                                // 4. set the new cookie
+                                setStringifiedCookie('cart', currentCart);
+                              }}
+                              data-test-id="increase-button"
+                            >
+                              +
                             </button>
                           </div>
-                          <p>
-                            <span
-                              data-test-id={`cart-product-quantity-${item.id}`}
-                            >
-                              {item.quantity}
-                            </span>
-                            x € {item.price}
-                          </p>
-                          <p className="totalPrice">
-                            € {item.quantity * item.price}
-                          </p>
                         </div>
                       </div>
+                      <div css={priceQuantityProductInfo}>
+                        <div css={buttons}>
+                          <button
+                            className="deleteButton"
+                            onClick={() => {
+                              // data
+                              // 1. Set item quantity to -
+                              item.quantity = 0;
+                              // 2. create new array
+                              const updatedArray = combinedData.filter(
+                                (i) => i.quantity !== 0,
+                              );
+                              // 3. update the state of the data
+                              setCombinedData(updatedArray);
+                              props.setCartQ(updatedArray);
+
+                              // Cookie part
+                              // 1. get the cookie
+                              const currentCart = getParsedCookie('cart');
+                              // 2. get the tshirt
+                              const currentTshirt = currentCart.find(
+                                (tshirtInCart) => item.id === tshirtInCart.id,
+                              );
+                              // 3. update the counter inside the tshirt
+                              currentTshirt.quantity = 0;
+                              // 4. create new cart
+                              const updatedCart = currentCart.filter(
+                                (t) => t.quantity !== 0,
+                              );
+                              // 5. set the new cookie
+                              setStringifiedCookie('cart', updatedCart);
+                            }}
+                            data-test-id={`cart-product-remove-${item.id}`}
+                          >
+                            x
+                          </button>
+                        </div>
+                        <p>
+                          <span
+                            data-test-id={`cart-product-quantity-${item.id}`}
+                          >
+                            {item.quantity}
+                          </span>
+                          x €{item.price}
+                        </p>
+                        <p className="totalPrice">
+                          €{item.quantity * item.price}
+                        </p>
+                      </div>
                     </div>
-                  );
-                })}
-              </div>
-              <div css={contentRightSide}>
-                <h2>
-                  Shopping bag{' '}
-                  <span>
-                    ({totalQ} {totalQ > 1 ? 'items' : 'item'}){' '}
-                  </span>
-                </h2>
-                <h2 className="total">
-                  Total: € <div data-test-id="cart-total">{totalP}</div>
-                </h2>
-                {totalP < 30 && (
-                  <span className="hiddenText">
-                    Free delivery if you add €{30 - totalP} to the shopping bag
-                  </span>
-                )}
-                {totalP < 30 ? (
-                  <span> Delivery costs: €30 </span>
-                ) : (
-                  <span>Delivery costs: free of charge </span>
-                )}
-                <hr />
-                <h2 className="grandTotal">
-                  Total: € {totalP < 30 ? totalP + 30 : totalP}{' '}
-                </h2>
-                <div className="additionalInfo">
-                  <p> 🚚 Free delivery for orders over €30</p>
-                  <p>↩️ Free returns in 30 days</p>
-                  <p>🔒 Secure payment</p>
-                </div>
-                <Link href="/checkout">
-                  <div>
-                    <button css={checkoutButton} data-test-id="cart-checkout">
-                      Checkout
-                    </button>{' '}
                   </div>
-                </Link>
-              </div>
-            </>
+                );
+              })}
+            </div>
           )}
+          <div css={contentRightSide}>
+            <h2>
+              Shopping bag{' '}
+              <span>
+                ({totalQ} {totalQ > 1 || totalQ === 0 ? 'items' : 'item'}){' '}
+              </span>
+            </h2>
+            <h2 className="total">
+              Total: € <div data-test-id="cart-total">{totalP}</div>
+            </h2>
+            {totalP < 30 && (
+              <span className="hiddenText">
+                Free delivery if you add €{30 - totalP} to the shopping bag
+              </span>
+            )}
+            {totalP < 30 && totalP > 0 && <span> Delivery costs: €30 </span>}{' '}
+            {totalP > 30 && <span>Delivery costs: free of charge </span>}
+            <hr />
+            <h2 className="grandTotal">
+              Total: €{totalP < 30 && totalP > 0 ? totalP + 30 : totalP}{' '}
+            </h2>
+            <div className="additionalInfo">
+              <p> 🚚 Free delivery for orders over €30</p>
+              <p>↩️ Free returns in 30 days</p>
+              <p>🔒 Secure payment</p>
+            </div>
+            <Link href="/checkout">
+              <div>
+                <button
+                  css={checkoutButton}
+                  data-test-id="cart-checkout"
+                  disabled={totalP === 0}
+                >
+                  Checkout
+                </button>{' '}
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
     </>

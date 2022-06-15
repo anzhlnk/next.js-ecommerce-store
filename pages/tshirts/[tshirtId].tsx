@@ -141,15 +141,25 @@ const contentRightSide = css`
   }
 
   .quantityInput {
-    width: 48px;
+    width: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    background-color: #ffffff;
   }
 
   .quantityButtonParent button {
+    padding-right: 24px;
+    width: 8px;
     border: none;
     background: none;
     outline: none;
     border-radius: 0;
-    margin: 0px 8px;
+    margin: 0px 0px 0px 0px;
   }
   .quantityButtonParent:active {
     box-shadow: rgba(0, 0, 0, 0.1) 0.4px 0.4px 0.4px;
@@ -241,7 +251,7 @@ export default function Tshirt(props: Props) {
             <div css={contentRightSide}>
               <h1>{props.superTshirt.name} </h1>
               <div className="productPrice">
-                €{' '}
+                €
                 <div data-test-id="product-price">
                   {props.superTshirt.price}
                 </div>
@@ -290,6 +300,7 @@ export default function Tshirt(props: Props) {
                     onChange={(event) =>
                       setCounter(Number(event.currentTarget.value))
                     }
+                    disabled
                   />
 
                   <button

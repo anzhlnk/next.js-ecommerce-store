@@ -281,7 +281,7 @@ export default function ListTshirtsWoman(props) {
                           );
                         })}
                       </div>
-                      <div>€ {tshirt.price}</div>
+                      <div>€{tshirt.price}</div>
                     </div>
                   </div>
                 );

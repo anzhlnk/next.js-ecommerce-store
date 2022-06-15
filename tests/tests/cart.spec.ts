@@ -34,8 +34,8 @@ test('add to cart test', async ({ page }) => {
   // find the delete button by  its id and delete the product
   const deleteQ = await page.locator('[data-test-id^="cart-product-remove-"]');
   await deleteQ.click();
-  await expect(countInHeader).toHaveText(' ');
-  const titleLocator = await page.locator('h2');
+  await expect(countInHeader).toHaveText('0');
+  const titleLocator = await page.locator('data-test-id=empty-cart-text');
   await expect(titleLocator).toHaveText('Your Cart is Empty!');
 });
 
