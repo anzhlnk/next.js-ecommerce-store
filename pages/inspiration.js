@@ -84,7 +84,7 @@ export default function Inspiration() {
               <div className="textRightSide">
                 <div className="gallery__item gallery__item--1">
                   <Image
-                    src="/inspiration1.jpg"
+                    src="/Inspiration1.jpg"
                     alt="product image"
                     width="492"
                     height="736"
@@ -94,7 +94,7 @@ export default function Inspiration() {
 
                 <div className="gallery__item gallery__item--2">
                   <Image
-                    src="/inspiration2.jpg"
+                    src="/Inspiration2.jpg"
                     alt="product image"
                     width="492"
                     height="736"
@@ -103,7 +103,7 @@ export default function Inspiration() {
                 </div>
                 <div className="gallery__item gallery__item--3">
                   <Image
-                    src="/inspiration6.jpg"
+                    src="/Inspiration6.jpg"
                     alt="product image"
                     width="999"
                     height="645"
@@ -112,7 +112,7 @@ export default function Inspiration() {
                 </div>
                 <div className="gallery__item gallery__item--4">
                   <Image
-                    src="/inspiration4.jpg"
+                    src="/Inspiration4.jpg"
                     alt="product image"
                     width="492"
                     height="736"
@@ -121,7 +121,7 @@ export default function Inspiration() {
                 </div>
                 <div className="gallery__item gallery__item--5">
                   <Image
-                    src="/inspiration3.jpg"
+                    src="/Inspiration3.jpg"
                     alt="product image"
                     width="492"
                     height="736"
@@ -130,7 +130,7 @@ export default function Inspiration() {
                 </div>
                 <div className="gallery__item gallery__item--6">
                   <Image
-                    src="/inspiration5.jpg"
+                    src="/Inspiration5.jpg"
                     alt="product image"
                     width="999"
                     height="645"
