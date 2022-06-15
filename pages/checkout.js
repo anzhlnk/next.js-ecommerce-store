@@ -97,6 +97,10 @@ const contentRightSide = css`
     border-top: 0.98px;
     margin: 24px 0px;
   }
+  .hiddenText {
+    font-size: 11px;
+    color: #b2b2b2;
+  }
 `;
 
 export default function CheckOut(props) {
@@ -246,6 +250,7 @@ export default function CheckOut(props) {
                   Free delivery if you add €{30 - totalP} to the shopping bag
                 </span>
               )}
+              <br />
               {totalP < 30 ? (
                 <span> Delivery costs: €30 </span>
               ) : (

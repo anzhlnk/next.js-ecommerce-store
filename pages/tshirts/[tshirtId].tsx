@@ -128,6 +128,7 @@ const contentRightSide = css`
   }
 
   .quantityButtonParent {
+    padding-left: 12px;
     border-radius: 50px;
     height: 38px;
     width: 95px;
