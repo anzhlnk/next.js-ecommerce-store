@@ -130,7 +130,6 @@ const tshirts = (isAvailable) => css`
 `;
 
 export default function ListTshirts(props) {
-  let isAvailable = false;
   return (
     <>
       <Head>
@@ -140,14 +139,14 @@ export default function ListTshirts(props) {
       <div css={contentAll}>
         <div css={heading}>
           <Link href="/">
-            <div>
+            <a>
               <Image
                 src="/homeLogo.png"
                 width="30"
                 height="30"
                 alt=" home Logo"
               />
-            </div>
+            </a>
           </Link>
           <p>/ All T-Shirts</p>
         </div>
@@ -252,41 +251,34 @@ export default function ListTshirts(props) {
               {props.productDatabase.map((tshirt) => {
                 return (
                   <div key={`tshirt-${tshirt.id}`} css={tshirtListItemStyles}>
-                    <a
-                      data-test-id={`product-${tshirt.id}`}
-                      href={`/tshirts/${tshirt.id}`}
-                    >
-                      <Link href={`/tshirts/${tshirt.id}`}>
-                        <a>
-                          <Image
-                            src={`/${tshirt.id}.jpg`}
-                            alt="product image"
-                            width="262"
-                            height="393"
-                          />
-                        </a>
-                      </Link>
-                      <div>{tshirt.name}</div>
-                      <div className="itemInfo">
-                        <div css={sizesAll}>
-                          {/* {tshirt.size} */}
-                          {props.sizeDatabase.map((oneSize) => {
-                            oneSize.size === tshirt.size
-                              ? (isAvailable = true)
-                              : (isAvailable = false);
-                            return (
-                              <div
-                                key={`availableSize-${oneSize.size}`}
-                                css={tshirts(isAvailable)}
-                              >
-                                {oneSize.size}
-                              </div>
-                            );
-                          })}
+                    <Link href={`/tshirts/${tshirt.id}`}>
+                      <a data-test-id={`product-${tshirt.id}`}>
+                        <Image
+                          src={`/${tshirt.id}.jpg`}
+                          alt="product image"
+                          width="262"
+                          height="393"
+                        />
+
+                        <div>{tshirt.name}</div>
+                        <div className="itemInfo">
+                          <div css={sizesAll}>
+                            {/* {tshirt.size} */}
+                            {props.sizeDatabase.map((oneSize) => {
+                              return (
+                                <div
+                                  key={`availableSize-${oneSize.size}`}
+                                  css={tshirts(oneSize.size === tshirt.size)}
+                                >
+                                  {oneSize.size}
+                                </div>
+                              );
+                            })}
+                          </div>
+                          <div>€{tshirt.price}</div>
                         </div>
-                        <div>€{tshirt.price}</div>
-                      </div>
-                    </a>
+                      </a>
+                    </Link>
                   </div>
                 );
               })}
