@@ -144,14 +144,14 @@ export default function ListTshirtsMen(props) {
       <div css={contentAll}>
         <div css={heading}>
           <Link href="/">
-            <div>
+            <a>
               <Image
                 src="/homeLogo.png"
                 width="30"
                 height="30"
                 alt=" home Logo"
               />
-            </div>
+            </a>
           </Link>
           <p>/ Men</p>
         </div>
@@ -256,14 +256,14 @@ export default function ListTshirtsMen(props) {
                 return (
                   <div key={`tshirt-${tshirt.id}`} css={tshirtListItemStyles}>
                     <Link href={`/tshirts/${tshirt.id}`}>
-                      <div>
+                      <a>
                         <Image
                           src={`/${tshirt.id}.jpg`}
                           alt="product image"
                           width="262"
                           height="393"
                         />
-                      </div>
+                      </a>
                     </Link>
                     <div>{tshirt.name}</div>
                     <div className="itemInfo">

@@ -226,14 +226,14 @@ export default function Tshirt(props: Props) {
       <div css={contentAll}>
         <div css={heading}>
           <Link href="/">
-            <div>
+            <a>
               <Image
                 src="/homeLogo.png"
                 width="30"
                 height="30"
                 alt=" home Logo"
               />
-            </div>
+            </a>
           </Link>
           <p>/ All T-Shirts / {props.superTshirt.name}</p>
         </div>

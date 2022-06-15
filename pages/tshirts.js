@@ -256,14 +256,16 @@ export default function ListTshirts(props) {
                       data-test-id={`product-${tshirt.id}`}
                       href={`/tshirts/${tshirt.id}`}
                     >
-                      <div>
-                        <Image
-                          src={`/${tshirt.id}.jpg`}
-                          alt="product image"
-                          width="262"
-                          height="393"
-                        />
-                      </div>
+                      <Link href={`/tshirts/${tshirt.id}`}>
+                        <a>
+                          <Image
+                            src={`/${tshirt.id}.jpg`}
+                            alt="product image"
+                            width="262"
+                            height="393"
+                          />
+                        </a>
+                      </Link>
                       <div>{tshirt.name}</div>
                       <div className="itemInfo">
                         <div css={sizesAll}>

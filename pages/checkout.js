@@ -142,14 +142,14 @@ export default function CheckOut(props) {
       <div css={contentAll}>
         <div css={heading}>
           <Link href="/">
-            <div>
+            <a>
               <Image
                 src="/homeLogo.png"
                 width="30"
                 height="30"
                 alt=" home Logo"
               />
-            </div>
+            </a>
           </Link>
           <p>/ Customer details </p>
         </div>

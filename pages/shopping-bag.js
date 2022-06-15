@@ -239,14 +239,14 @@ export default function CartPage(props) {
       <div css={contentAll}>
         <div css={heading}>
           <Link href="/">
-            <div>
+            <a>
               <Image
                 src="/homeLogo.png"
                 width="30"
                 height="30"
                 alt=" home Logo"
               />
-            </div>
+            </a>
           </Link>
           <p>/ Shopping bag </p>
         </div>
@@ -281,14 +281,14 @@ export default function CartPage(props) {
                   >
                     <div css={tshirtsInCart}>
                       <Link href={`/tshirts/${item.id}`}>
-                        <div css={productImage}>
+                        <a css={productImage}>
                           <Image
                             src={`/${item.id}.jpg`}
                             alt="product image"
                             width="131"
                             height="196"
                           />
-                        </div>
+                        </a>
                       </Link>
                       <div className="productInfo">
                         <p className="itemName">{item.name}</p>
@@ -442,7 +442,7 @@ export default function CartPage(props) {
               <p>🔒 Secure payment</p>
             </div>
             <Link href="/checkout">
-              <div>
+              <a>
                 <button
                   css={checkoutButton}
                   data-test-id="cart-checkout"
@@ -450,7 +450,7 @@ export default function CartPage(props) {
                 >
                   Checkout
                 </button>{' '}
-              </div>
+              </a>
             </Link>
           </div>
         </div>
