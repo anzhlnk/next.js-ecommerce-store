@@ -67,14 +67,14 @@ export default function Inspiration() {
 
         <div css={heading}>
           <Link href="/">
-            <div>
+            <a>
               <Image
                 src="/homeLogo.png"
                 width="30"
                 height="30"
                 alt=" home Logo"
               />
-            </div>
+            </a>
           </Link>
           <p>/ Inspiration </p>
         </div>
