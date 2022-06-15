@@ -28,6 +28,9 @@ const contentMain = css`
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
+  .emptyCartText {
+    width: 600px;
+  }
 `;
 
 const tshirtsInCartParent = css`
@@ -250,7 +253,9 @@ export default function CartPage(props) {
         <div css={contentMain}>
           {combinedData.length === 0 ? (
             <>
-              <h2 data-test-id="empty-cart-text">Your Cart is Empty!</h2>
+              <h2 className="emptyCartText" data-test-id="empty-cart-text">
+                Your Cart is Empty!
+              </h2>
               {/* <div css={contentRightSide}>
                 <h2>
                   Shopping bag <span>({totalQ} items)</span>

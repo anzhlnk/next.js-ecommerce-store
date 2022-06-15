@@ -284,7 +284,6 @@ export default function Tshirt(props: Props) {
                   >
                     -
                   </button>
-
                   <input
                     type="number"
                     className="quantityInput"

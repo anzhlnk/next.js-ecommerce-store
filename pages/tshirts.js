@@ -252,17 +252,18 @@ export default function ListTshirts(props) {
               {props.productDatabase.map((tshirt) => {
                 return (
                   <div key={`tshirt-${tshirt.id}`} css={tshirtListItemStyles}>
-                    <a data-test-id={`product-${tshirt.id}`}>
-                      <Link href={`/tshirts/${tshirt.id}`}>
-                        <div>
-                          <Image
-                            src={`/${tshirt.id}.jpg`}
-                            alt="product image"
-                            width="262"
-                            height="393"
-                          />
-                        </div>
-                      </Link>
+                    <a
+                      data-test-id={`product-${tshirt.id}`}
+                      href={`/tshirts/${tshirt.id}`}
+                    >
+                      <div>
+                        <Image
+                          src={`/${tshirt.id}.jpg`}
+                          alt="product image"
+                          width="262"
+                          height="393"
+                        />
+                      </div>
                       <div>{tshirt.name}</div>
                       <div className="itemInfo">
                         <div css={sizesAll}>
