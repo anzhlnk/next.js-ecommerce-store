@@ -61,10 +61,6 @@ export default function Inspiration() {
         <meta name="description" content="Inspiration" />
       </Head>
       <div css={contentAll}>
-        {/* prevent submission with any of the above fields being empty */}
-        {/* Show total */}
-        {/* shipping and payment information */}
-
         <div css={heading}>
           <Link href="/">
             <a>

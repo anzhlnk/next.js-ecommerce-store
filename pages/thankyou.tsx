@@ -64,10 +64,6 @@ export default function CheckOut() {
         <meta name="description" content="Order completed" />
       </Head>
       <div css={contentAll}>
-        {/* prevent submission with any of the above fields being empty */}
-        {/* Show total */}
-        {/* shipping and payment information */}
-
         <div css={heading}>
           <Link href="/">
             <div>
