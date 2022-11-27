@@ -5,8 +5,7 @@
 This is an E-commerce project for the web development course from https://upleveled.io/.
 
 
-https://user-images.githubusercontent.com/102800435/204135667-a10a8893-eaba-48d0-8a39-1b4b78a8c4e0.mp4
-
+https://user-images.githubusercontent.com/102800435/204136319-bac5fdad-f409-4a61-afec-1a8c7e72a4ab.mp4
 
 
 The website is developed for desktop-size devices.
