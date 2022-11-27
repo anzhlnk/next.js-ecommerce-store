@@ -3,7 +3,11 @@
 ## Description
 
 This is an E-commerce project for the web development course from https://upleveled.io/.
-Check out the deployed version here: https://ecom-orange-orange.herokuapp.com/
+
+
+https://user-images.githubusercontent.com/102800435/204135667-a10a8893-eaba-48d0-8a39-1b4b78a8c4e0.mp4
+
+
 
 The website is developed for desktop-size devices.
 
